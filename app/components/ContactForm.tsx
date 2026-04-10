@@ -10,19 +10,21 @@ const styles = {
     select: "border-neutral-200 bg-white text-neutral-900 focus:border-amber-400 focus:ring-amber-400/20",
     btn: "from-amber-500 to-amber-600 text-white shadow-amber-500/20",
   },
-  dark: {
-    label: "text-zinc-500",
+  /** Design B — navy labels, classic contractor form */
+  dealer: {
+    label: "text-slate-600",
     input:
-      "border-white/10 bg-white/5 text-white placeholder:text-zinc-600 focus:border-cyan-400/50 focus:ring-cyan-400/15",
-    select: "border-white/10 bg-zinc-900 text-white focus:border-cyan-400/50 focus:ring-cyan-400/15",
-    btn: "from-cyan-500 to-fuchsia-600 text-zinc-950 shadow-cyan-500/25",
+      "rounded-md border-slate-300 bg-white text-slate-900 placeholder:text-slate-400 focus:border-[#0f2744] focus:ring-[#0f2744]/15",
+    select: "rounded-md border-slate-300 bg-white text-slate-900 focus:border-[#0f2744] focus:ring-[#0f2744]/15",
+    btn: "from-[#ea580c] to-[#c2410c] text-white shadow-orange-500/25",
   },
-  terra: {
-    label: "text-stone-500",
+  /** Design C — sage / forest minimal */
+  clima: {
+    label: "text-[#3d5c4a]",
     input:
-      "border-stone-300 bg-[#faf7f2] text-stone-900 placeholder:text-stone-400 focus:border-[#c45c3a] focus:ring-[#c45c3a]/20",
-    select: "border-stone-300 bg-[#faf7f2] text-stone-900 focus:border-[#c45c3a] focus:ring-[#c45c3a]/20",
-    btn: "from-[#c45c3a] to-[#9a3412] text-white shadow-[#c45c3a]/25",
+      "rounded-lg border-[#c5d4cc] bg-white text-[#1a2e26] placeholder:text-[#6b8578] focus:border-[#3f6b4f] focus:ring-[#3f6b4f]/20",
+    select: "rounded-lg border-[#c5d4cc] bg-white text-[#1a2e26] focus:border-[#3f6b4f] focus:ring-[#3f6b4f]/20",
+    btn: "from-[#2d4a3e] to-[#1a2e26] text-white shadow-[#2d4a3e]/30",
   },
 } as const;
 
@@ -46,6 +48,8 @@ export function ContactForm({ variant = "light" }: { variant?: ContactFormVarian
     window.location.href = `mailto:info@hhhworks.com?subject=${subject}&body=${body}`;
   }
 
+  const rounded = variant === "dealer" ? "rounded-md" : variant === "clima" ? "rounded-lg" : "rounded-xl";
+
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
       <div className="grid gap-4 sm:grid-cols-2">
@@ -57,7 +61,7 @@ export function ContactForm({ variant = "light" }: { variant?: ContactFormVarian
             name="name"
             required
             autoComplete="name"
-            className={`w-full rounded-xl border px-4 py-3 outline-none transition focus:ring-2 ${s.input}`}
+            className={`w-full border px-4 py-3 outline-none transition focus:ring-2 ${rounded} ${s.input}`}
             placeholder="Your name"
           />
         </label>
@@ -70,7 +74,7 @@ export function ContactForm({ variant = "light" }: { variant?: ContactFormVarian
             type="tel"
             required
             autoComplete="tel"
-            className={`w-full rounded-xl border px-4 py-3 outline-none focus:ring-2 ${s.input}`}
+            className={`w-full border px-4 py-3 outline-none focus:ring-2 ${rounded} ${s.input}`}
             placeholder="(813) …"
           />
         </label>
@@ -82,7 +86,7 @@ export function ContactForm({ variant = "light" }: { variant?: ContactFormVarian
         <select
           name="service"
           required
-          className={`w-full rounded-xl border px-4 py-3 outline-none focus:ring-2 ${s.select}`}
+          className={`w-full border px-4 py-3 outline-none focus:ring-2 ${rounded} ${s.select}`}
           defaultValue=""
         >
           <option value="" disabled>
@@ -104,15 +108,15 @@ export function ContactForm({ variant = "light" }: { variant?: ContactFormVarian
           name="message"
           required
           rows={4}
-          className={`w-full resize-y rounded-xl border px-4 py-3 outline-none focus:ring-2 ${s.input}`}
+          className={`w-full resize-y border px-4 py-3 outline-none focus:ring-2 ${rounded} ${s.input}`}
           placeholder="Tell us what you need…"
         />
       </label>
       <button
         type="submit"
-        className={`w-full rounded-xl bg-gradient-to-r py-4 text-sm font-bold uppercase tracking-widest shadow-md transition hover:brightness-105 ${s.btn}`}
+        className={`w-full bg-gradient-to-r py-4 text-sm font-bold uppercase tracking-widest shadow-md transition hover:brightness-105 ${rounded} ${s.btn}`}
       >
-        Send request
+        {variant === "dealer" ? "Request service" : "Send request"}
       </button>
     </form>
   );

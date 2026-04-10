@@ -3,9 +3,9 @@ import { BNav } from "../components/b/BNav";
 
 export default function DesignBLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-full bg-[#06060a] font-[family-name:var(--font-b-sans)] text-zinc-200">
+    <div className="min-h-full bg-[#eef2f7] font-[family-name:var(--font-b-sans)] text-slate-800">
       <BNav />
-      <div className="pt-16">{children}</div>
+      <div className="pt-[6.75rem]">{children}</div>
       <BFooter />
     </div>
   );

@@ -1,12 +1,5 @@
 import type { Metadata } from "next";
-import {
-  DM_Sans,
-  Instrument_Serif,
-  JetBrains_Mono,
-  Outfit,
-  Space_Grotesk,
-  Syne,
-} from "next/font/google";
+import { DM_Sans, Fraunces, Manrope, Plus_Jakarta_Sans, Syne } from "next/font/google";
 import { DesignSwitcher } from "./components/DesignSwitcher";
 import "./globals.css";
 
@@ -22,26 +15,21 @@ const dmSans = DM_Sans({
   weight: ["400", "500", "600", "700"],
 });
 
-const spaceGrotesk = Space_Grotesk({
+/** Design B — dealer / franchise-style HVAC sites */
+const plusJakarta = Plus_Jakarta_Sans({
   variable: "--font-b-sans",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
-const jetbrains = JetBrains_Mono({
-  variable: "--font-b-mono",
+/** Design C — eco / European heat-pump minimal */
+const fraunces = Fraunces({
+  variable: "--font-c-display",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["500", "600", "700"],
 });
 
-const instrumentSerif = Instrument_Serif({
-  variable: "--font-c-serif",
-  subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
-});
-
-const outfit = Outfit({
+const manrope = Manrope({
   variable: "--font-c-sans",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
@@ -64,7 +52,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${syne.variable} ${dmSans.variable} ${spaceGrotesk.variable} ${jetbrains.variable} ${instrumentSerif.variable} ${outfit.variable} h-full scroll-smooth`}
+      className={`${syne.variable} ${dmSans.variable} ${plusJakarta.variable} ${fraunces.variable} ${manrope.variable} h-full scroll-smooth`}
     >
       <head>
         <link

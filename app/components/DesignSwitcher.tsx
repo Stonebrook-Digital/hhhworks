@@ -6,9 +6,9 @@ import { useEffect, useRef, useState } from "react";
 import { hrefForDesign, parseDesignPath, type DesignId } from "@/lib/design-routes";
 
 const OPTIONS: { id: DesignId; name: string; tagline: string }[] = [
-  { id: "a", name: "Design A", tagline: "Light · Syne · Tampa editorial" },
-  { id: "b", name: "Design B", tagline: "Nocturne · Grid · Neon signal" },
-  { id: "c", name: "Design C", tagline: "Terra · Serif · Atelier calm" },
+  { id: "a", name: "Design A", tagline: "Light editorial · Syne + DM Sans" },
+  { id: "b", name: "Design B", tagline: "Dealer classic · Navy + orange (national HVAC style)" },
+  { id: "c", name: "Design C", tagline: "Clima · Sage minimal · eco / heat-pump inspired" },
 ];
 
 export function DesignSwitcher() {
