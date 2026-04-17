@@ -77,7 +77,7 @@ export default function HomePage() {
               </p>
               <p className="mt-4 text-sm font-semibold text-brand-red">Ada</p>
               <Link
-                href="/reviews"
+                href="/areas#customer-reviews"
                 className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-surface/85 transition hover:gap-3 hover:text-surface"
               >
                 Read reviews

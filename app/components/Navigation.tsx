@@ -5,11 +5,12 @@ import { TripleHLogo } from "@/app/components/TripleHLogo";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-const links = [
+type NavLink = { href: string; label: string; shortLabel?: string };
+
+const links: NavLink[] = [
   { href: "/services", label: "Services" },
   { href: "/about", label: "About" },
-  { href: "/areas", label: "Areas" },
-  { href: "/reviews", label: "Reviews" },
+  { href: "/areas", label: "Areas & reviews", shortLabel: "Areas" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -29,19 +30,27 @@ export function Navigation() {
         </Link>
 
         <nav className="hidden items-center gap-0.5 md:flex" aria-label="Primary">
-          {links.map(({ href, label }) => {
+          {links.map(({ href, label, shortLabel }) => {
             const active = pathname === href;
             return (
               <Link
                 key={href}
                 href={href}
+                title={shortLabel ? label : undefined}
                 className={`rounded-full px-3.5 py-2 text-sm font-medium transition lg:px-4 ${
                   active
                     ? "bg-navy text-surface"
                     : "text-navy-muted hover:bg-page hover:text-navy"
                 }`}
               >
-                {label}
+                {shortLabel ? (
+                  <>
+                    <span className="lg:hidden">{shortLabel}</span>
+                    <span className="hidden lg:inline">{label}</span>
+                  </>
+                ) : (
+                  label
+                )}
               </Link>
             );
           })}
@@ -74,7 +83,7 @@ export function Navigation() {
         className={`border-t border-navy/10 bg-surface md:hidden ${open ? "block" : "hidden"}`}
       >
         <nav className="flex flex-col gap-0.5 px-5 py-4 shadow-lg" aria-label="Mobile">
-          {links.map(({ href, label }) => (
+          {links.map(({ href, label, shortLabel }) => (
             <Link
               key={href}
               href={href}
@@ -83,7 +92,7 @@ export function Navigation() {
                 pathname === href ? "bg-navy text-surface" : "text-navy hover:bg-page"
               }`}
             >
-              {label}
+              {shortLabel ?? label}
             </Link>
           ))}
           <a

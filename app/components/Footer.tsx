@@ -4,8 +4,7 @@ import { TripleHLogo } from "@/app/components/TripleHLogo";
 const links = [
   { href: "/services", label: "Services" },
   { href: "/about", label: "About" },
-  { href: "/areas", label: "Areas we serve" },
-  { href: "/reviews", label: "Reviews" },
+  { href: "/areas", label: "Areas & reviews" },
   { href: "/contact", label: "Contact" },
 ];
 
