@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import { HeroMedia, type HeroSlide } from "@/app/components/HeroMedia";
 import { HomeFaq } from "@/app/components/HomeFaq";
+import { TripleHLogo } from "@/app/components/TripleHLogo";
 
 const HERO_SLIDES: HeroSlide[] = [
   {
@@ -40,15 +40,7 @@ export default function HomePage() {
         <div className="relative z-10 mx-auto flex min-h-[min(100dvh,52rem)] max-w-[1400px] flex-col px-5 pb-28 pt-20 md:px-8 md:pb-24 md:pt-24 lg:flex-row lg:items-stretch lg:gap-12 lg:px-10 lg:pb-20 lg:pt-28">
           <div className="flex max-w-2xl flex-1 flex-col lg:max-w-none lg:w-[52%]">
             <div className="animate-rise-soft delay-1 w-full max-w-2xl rounded-2xl border border-white/25 bg-white/[0.94] px-7 py-6 shadow-2xl shadow-black/25 backdrop-blur-md md:px-10 md:py-8">
-              <Image
-                src="/triple-h-logo.png"
-                alt="Triple H Air Conditioning, Inc."
-                width={480}
-                height={120}
-                className="h-auto w-full"
-                priority
-                sizes="(min-width: 1024px) 36rem, 90vw"
-              />
+              <TripleHLogo variant="full" className="h-auto w-full" />
             </div>
             <p className="animate-rise-soft delay-2 mt-8 text-sm font-semibold uppercase tracking-[0.25em] text-brand-red drop-shadow-md">
               Tampa Bay · Since 2004

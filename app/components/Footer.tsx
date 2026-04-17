@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { TripleHLogo } from "@/app/components/TripleHLogo";
 
 const links = [
   { href: "/services", label: "Services" },
@@ -16,13 +16,7 @@ export function Footer() {
         <div className="grid gap-12 md:grid-cols-[1.2fr_1fr] lg:grid-cols-[1.3fr_1fr_1fr]">
           <div>
             <div className="inline-block rounded-lg bg-white p-3 shadow-sm ring-1 ring-white/10">
-              <Image
-                src="/triple-h-logo.png"
-                alt="Triple H Air Conditioning, Inc."
-                width={200}
-                height={48}
-                className="h-9 w-auto md:h-10"
-              />
+              <TripleHLogo variant="mark" className="h-9 w-auto md:h-10" />
             </div>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-surface/75">
               Full-service HVAC since 2004. Flat-rate quotes before we start—serving Tampa Bay from

@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
+import { TripleHLogo } from "@/app/components/TripleHLogo";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
@@ -25,14 +25,7 @@ export function Navigation() {
           className="flex shrink-0 items-center gap-3 transition hover:opacity-90"
           onClick={() => setOpen(false)}
         >
-          <Image
-            src="/triple-h-logo.png"
-            alt="Triple H Air Conditioning, Inc."
-            width={200}
-            height={48}
-            className="h-9 w-auto md:h-10"
-            priority
-          />
+          <TripleHLogo variant="mark" className="h-9 w-auto md:h-10" />
         </Link>
 
         <nav className="hidden items-center gap-0.5 md:flex" aria-label="Primary">
