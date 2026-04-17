@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { HeroMedia, type HeroSlide } from "@/app/components/HeroMedia";
+import { HomeFaq } from "@/app/components/HomeFaq";
 
 const HERO_SLIDES: HeroSlide[] = [
   {
@@ -176,6 +177,73 @@ export default function HomePage() {
               All services
             </Link>
           </p>
+        </div>
+      </section>
+
+      <section className="border-t border-navy/10 bg-page px-5 py-14 md:px-8 lg:px-10 lg:py-18">
+        <div className="mx-auto flex max-w-[1400px] flex-col gap-8">
+          <div className="rounded-3xl border border-navy/10 bg-white p-6 shadow-sm md:p-8">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-brand-red">FAQ</p>
+            <h3 className="font-display mt-2 text-2xl font-semibold tracking-tight text-navy md:text-[1.75rem]">
+              Quick answers
+            </h3>
+            <HomeFaq />
+          </div>
+
+          <div className="rounded-3xl border border-navy/10 bg-surface p-6 shadow-sm md:p-8">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-brand-red">Mock form</p>
+            <h2 className="font-display mt-2 text-2xl font-semibold tracking-tight text-navy md:text-3xl">
+              Request a free estimate
+            </h2>
+            <p className="mt-3 max-w-2xl text-sm text-muted">
+              Share a few quick details and we&apos;ll follow up with options and next steps.
+            </p>
+
+            <form className="mt-6 grid gap-4 sm:grid-cols-2">
+              <label className="flex flex-col gap-1.5 text-sm font-medium text-navy">
+                Name
+                <input
+                  type="text"
+                  placeholder="Your full name"
+                  className="h-11 rounded-xl border border-navy/15 bg-white px-3 text-sm text-navy outline-none transition placeholder:text-muted/70 focus:border-brand-red/60 focus:ring-2 focus:ring-brand-red/20"
+                />
+              </label>
+              <label className="flex flex-col gap-1.5 text-sm font-medium text-navy">
+                Phone
+                <input
+                  type="tel"
+                  placeholder="(813) 555-0123"
+                  className="h-11 rounded-xl border border-navy/15 bg-white px-3 text-sm text-navy outline-none transition placeholder:text-muted/70 focus:border-brand-red/60 focus:ring-2 focus:ring-brand-red/20"
+                />
+              </label>
+              <label className="flex flex-col gap-1.5 text-sm font-medium text-navy sm:col-span-2">
+                Email
+                <input
+                  type="email"
+                  placeholder="you@example.com"
+                  className="h-11 rounded-xl border border-navy/15 bg-white px-3 text-sm text-navy outline-none transition placeholder:text-muted/70 focus:border-brand-red/60 focus:ring-2 focus:ring-brand-red/20"
+                />
+              </label>
+              <label className="flex flex-col gap-1.5 text-sm font-medium text-navy sm:col-span-2">
+                How can we help?
+                <textarea
+                  rows={4}
+                  placeholder="Tell us about your system, issue, or project."
+                  className="rounded-xl border border-navy/15 bg-white px-3 py-2.5 text-sm text-navy outline-none transition placeholder:text-muted/70 focus:border-brand-red/60 focus:ring-2 focus:ring-brand-red/20"
+                />
+              </label>
+              <div className="flex flex-wrap items-center gap-3 sm:col-span-2">
+                <button
+                  type="button"
+                  className="inline-flex items-center gap-2 rounded-full bg-brand-red px-6 py-3 text-xs font-bold uppercase tracking-wide text-white transition hover:bg-brand-red-hover"
+                >
+                  Send request
+                  <i className="fa-solid fa-paper-plane text-[10px]" aria-hidden />
+                </button>
+                <p className="text-xs text-muted">Demo form only - no live submission yet.</p>
+              </div>
+            </form>
+          </div>
         </div>
       </section>
 
