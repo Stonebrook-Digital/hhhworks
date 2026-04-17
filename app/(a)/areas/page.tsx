@@ -41,8 +41,8 @@ export default function AreasPage() {
           Work map
         </h2>
         <p className="mt-2 max-w-2xl text-sm text-muted">
-          Prototype: illustrative map with pins only—pan/zoom and satellite imagery are omitted on
-          purpose so everything stays static and API-free.
+          Google Maps (same embed as the home page) beside location chips—crew notes and review
+          snippets are static until you add your own map pins via Google or a future Maps API build.
         </p>
         <div className="mt-8 rounded-3xl border border-navy/10 bg-surface p-5 shadow-sm md:p-8">
           <ServiceAreaMapMock />

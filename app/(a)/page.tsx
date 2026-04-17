@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { HomeGoogleMap } from "@/app/components/HomeGoogleMap";
+import { GoogleMapsEmbed } from "@/app/components/GoogleMapsEmbed";
 import { HeroMedia, type HeroSlide } from "@/app/components/HeroMedia";
 import { HomeFaq } from "@/app/components/HomeFaq";
 import { TripleHLogo } from "@/app/components/TripleHLogo";
@@ -117,8 +117,8 @@ export default function HomePage() {
                 Where we work
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-muted">
-                Real Google Maps—pan and zoom like anywhere else. For our illustrated job pins and
-                review notes (no API), open{" "}
+                Real Google Maps—pan and zoom like anywhere else. For city chips, crew notes, and
+                review snippets, open{" "}
                 <Link href="/areas#work-map" className="font-semibold text-brand-red hover:underline">
                   Areas &amp; reviews
                 </Link>
@@ -126,7 +126,7 @@ export default function HomePage() {
               </p>
             </div>
             <div className="min-w-0 flex-1">
-              <HomeGoogleMap />
+              <GoogleMapsEmbed variant="hero" />
               <p className="mt-2 text-[11px] leading-snug text-muted">
                 Tip: In Google Maps, search your shop or &ldquo;Tampa Bay,&rdquo; click{" "}
                 <strong className="font-medium text-navy">Share → Embed a map</strong>, copy the{" "}
@@ -135,7 +135,8 @@ export default function HomePage() {
                   NEXT_PUBLIC_GOOGLE_MAPS_EMBED_URL
                 </code>{" "}
                 in <code className="rounded bg-navy/5 px-1 py-0.5 text-[10px]">.env.local</code> for
-                a pinned centroid or drawing.
+                a tighter view with fewer unrelated pins. Embed maps can&apos;t hide Google&apos;s
+                default business labels without the paid Maps JavaScript API.
               </p>
             </div>
           </div>

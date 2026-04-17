@@ -1,18 +1,11 @@
 "use client";
 
-import { useId, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
+import { GoogleMapsEmbed } from "@/app/components/GoogleMapsEmbed";
 import { GoogleReviewBadge } from "@/app/components/GoogleReviewBadge";
 import { WORK_LOCATIONS, type WorkLocation } from "@/lib/service-locations";
 
-function sanitizeIdPrefix(id: string) {
-  return id.replace(/[^a-zA-Z0-9_-]/g, "");
-}
-
 export function ServiceAreaMapMock() {
-  const rawId = useId();
-  const uid = sanitizeIdPrefix(rawId);
-  const bayMaskId = `${uid}-bay-mask`;
-  const waterGradId = `${uid}-water-grad`;
   const [selected, setSelected] = useState<WorkLocation | null>(WORK_LOCATIONS[0] ?? null);
 
   const markers = useMemo(() => WORK_LOCATIONS, []);
@@ -24,7 +17,8 @@ export function ServiceAreaMapMock() {
           Locations
         </p>
         <p className="text-sm text-muted">
-          Illustrative map—not to scale. Tap a pin or a chip to see work notes and a linked review.
+          Pick a city for crew notes and a review snippet. The map matches our homepage—same Google
+          embed URL from your env.
         </p>
         <ul className="flex flex-wrap gap-2" aria-label="Job locations">
           {markers.map((loc) => {
@@ -78,74 +72,7 @@ export function ServiceAreaMapMock() {
         ) : null}
       </div>
 
-      <div className="relative min-h-[220px] overflow-hidden rounded-2xl border border-navy/10 bg-surface shadow-inner lg:min-h-[320px]">
-        <svg
-          viewBox="0 0 500 320"
-          className="h-full w-full touch-manipulation select-none"
-          role="img"
-          aria-label="Illustrative Tampa Bay service map with job pins"
-        >
-          <defs>
-            <linearGradient id={waterGradId} x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#9ec5de" />
-              <stop offset="100%" stopColor="#6ba3c7" />
-            </linearGradient>
-            <mask id={bayMaskId}>
-              <rect width="500" height="320" fill="white" />
-              <ellipse cx="252" cy="188" rx="108" ry="72" fill="black" />
-            </mask>
-          </defs>
-
-          <rect width="500" height="320" fill={`url(#${waterGradId})`} />
-          <rect width="500" height="320" fill="#c8dcc0" mask={`url(#${bayMaskId})`} />
-          <text
-            x="250"
-            y="28"
-            textAnchor="middle"
-            fill="rgba(26,37,64,0.45)"
-            fontSize="11"
-            fontWeight="600"
-            fontFamily="system-ui, sans-serif"
-            letterSpacing="0.18em"
-          >
-            TAMPA BAY (ILLUSTRATIVE)
-          </text>
-
-          {markers.map((loc) => {
-            const active = selected?.id === loc.id;
-            const { cx, cy } = loc.map;
-            return (
-              <g key={loc.id} transform={`translate(${cx}, ${cy})`}>
-                <title>{loc.name}</title>
-                <circle
-                  r={active ? 22 : 18}
-                  fill="none"
-                  stroke={active ? "#d91f2d" : "rgba(26,37,64,0.2)"}
-                  strokeWidth={active ? 3 : 2}
-                  className="pointer-events-none"
-                />
-                <circle
-                  r={12}
-                  fill="#d91f2d"
-                  stroke="#fff"
-                  strokeWidth={2}
-                  className="cursor-pointer transition hover:opacity-90"
-                  role="button"
-                  tabIndex={0}
-                  onClick={() => setSelected(loc)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      setSelected(loc);
-                    }
-                  }}
-                />
-                <circle r={4} cy={-6} fill="#d91f2d" className="pointer-events-none" />
-              </g>
-            );
-          })}
-        </svg>
-      </div>
+      <GoogleMapsEmbed variant="panel" />
     </div>
   );
 }
