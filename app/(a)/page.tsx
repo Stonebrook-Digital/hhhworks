@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { HomeGoogleMap } from "@/app/components/HomeGoogleMap";
 import { HeroMedia, type HeroSlide } from "@/app/components/HeroMedia";
 import { HomeFaq } from "@/app/components/HomeFaq";
 import { TripleHLogo } from "@/app/components/TripleHLogo";
@@ -104,6 +105,42 @@ export default function HomePage() {
           ))}
         </div>
       </div>
+
+      <section className="border-y border-navy/10 bg-surface py-14 md:py-20">
+        <div className="mx-auto max-w-[1400px] px-5 md:px-8 lg:px-10">
+          <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-14">
+            <div className="max-w-md shrink-0 lg:pt-2">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-brand-red">
+                Coverage
+              </p>
+              <h2 className="font-display mt-2 text-2xl font-semibold tracking-tight text-navy md:text-3xl">
+                Where we work
+              </h2>
+              <p className="mt-3 text-sm leading-relaxed text-muted">
+                Real Google Maps—pan and zoom like anywhere else. For our illustrated job pins and
+                review notes (no API), open{" "}
+                <Link href="/areas#work-map" className="font-semibold text-brand-red hover:underline">
+                  Areas &amp; reviews
+                </Link>
+                .
+              </p>
+            </div>
+            <div className="min-w-0 flex-1">
+              <HomeGoogleMap />
+              <p className="mt-2 text-[11px] leading-snug text-muted">
+                Tip: In Google Maps, search your shop or &ldquo;Tampa Bay,&rdquo; click{" "}
+                <strong className="font-medium text-navy">Share → Embed a map</strong>, copy the{" "}
+                <code className="rounded bg-navy/5 px-1 py-0.5 text-[10px]">src</code> URL into{" "}
+                <code className="rounded bg-navy/5 px-1 py-0.5 text-[10px]">
+                  NEXT_PUBLIC_GOOGLE_MAPS_EMBED_URL
+                </code>{" "}
+                in <code className="rounded bg-navy/5 px-1 py-0.5 text-[10px]">.env.local</code> for
+                a pinned centroid or drawing.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <section className="bg-page px-5 py-16 md:px-8 lg:px-10 lg:py-24">
         <div className="mx-auto max-w-[1400px]">
