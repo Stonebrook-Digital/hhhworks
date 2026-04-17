@@ -1,21 +1,21 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { Metadata } from "next";
 import { ContactForm } from "@/app/components/ContactForm";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Call Triple H Air Conditioning or send a message—Tampa Bay HVAC service.",
+  description: "Call Triple H Air Conditioning or request service—Brandon & Tampa Bay HVAC.",
 };
 
-/** Modern home exterior — different from condenser / old hero */
 const contactSideImg =
   "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&q=85&w=2000";
 
 export default function ContactPage() {
   return (
-    <main className="bg-neutral-50">
+    <main className="bg-page">
       <section className="mx-auto grid min-h-[calc(100vh-4.25rem)] max-w-[1600px] lg:grid-cols-2">
-        <div className="relative h-56 lg:hidden">
+        <div className="relative h-48 lg:hidden">
           <Image
             src={contactSideImg}
             alt=""
@@ -24,69 +24,77 @@ export default function ContactPage() {
             sizes="100vw"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-neutral-50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-page to-transparent" />
         </div>
         <div className="relative hidden min-h-[420px] lg:block">
           <Image
             src={contactSideImg}
-            alt="Modern home exterior"
+            alt="Home exterior"
             fill
             className="object-cover"
             sizes="50vw"
             priority
           />
-          {/* Thin edge fade only — photo stays visible */}
-          <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-white to-transparent" />
-          <div className="absolute bottom-12 left-12 right-16 max-w-lg rounded-2xl border border-white/60 bg-white/90 p-8 shadow-lg backdrop-blur-sm">
-            <p className="font-display text-2xl font-medium leading-snug text-neutral-900 md:text-3xl">
-              Talk to a human—
-              <span className="text-amber-700"> not a phone tree.</span>
+          <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-surface to-transparent" />
+          <div className="absolute bottom-10 left-10 max-w-sm rounded-2xl border border-navy/10 bg-surface/95 p-6 shadow-lg backdrop-blur-sm">
+            <p className="font-display text-lg font-semibold leading-snug text-navy">
+              Mon–Sat <span className="text-brand-red">7am–7pm</span>
+              <span className="mt-1 block text-sm font-normal text-muted">Sunday closed</span>
             </p>
           </div>
         </div>
 
-        <div className="flex flex-col justify-center bg-white px-5 py-16 shadow-sm md:px-12 lg:py-24 lg:pl-16 lg:pr-20">
-          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-amber-700">Contact</p>
-          <h1 className="font-display mt-3 text-4xl font-semibold tracking-tight text-neutral-900 md:text-5xl">
-            Let&rsquo;s get you on the schedule.
+        <div className="flex flex-col justify-center bg-surface px-5 py-12 shadow-sm md:px-12 lg:py-20 lg:pl-14 lg:pr-16">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-red">Contact</p>
+          <h1 className="font-display mt-2 text-4xl font-semibold tracking-tight text-navy md:text-5xl">
+            Let&apos;s talk.
           </h1>
-          <p className="mt-6 max-w-md text-neutral-600">
-            For fastest help, call. For non-urgent requests, drop a note—we respond as soon as we
-            can.
+          <p className="mt-4 max-w-md text-muted">
+            Fastest response: phone. For non-urgent requests, use the form—we reply as soon as we can.
           </p>
 
-          <div className="mt-10 flex flex-wrap gap-6 text-sm">
+          <div className="mt-8 flex flex-wrap gap-4 text-sm">
             <a
               href="tel:+18136554501"
-              className="flex items-center gap-3 rounded-2xl border border-neutral-200 bg-neutral-50 px-5 py-4 transition hover:border-amber-300/60 hover:bg-amber-50/50"
+              className="flex min-w-[10rem] flex-1 items-center gap-3 rounded-2xl border border-navy/10 bg-page px-4 py-4 transition hover:border-brand-red/40"
             >
-              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-amber-100 text-amber-700">
-                <i className="fa-solid fa-phone" aria-hidden />
+              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-navy text-surface">
+                <i className="fa-solid fa-phone text-sm" aria-hidden />
               </span>
               <span>
-                <span className="block text-[10px] uppercase tracking-wider text-neutral-500">Phone</span>
-                <span className="font-semibold text-neutral-900">(813) 655-4501</span>
+                <span className="block text-[10px] font-semibold uppercase tracking-wider text-muted">
+                  Phone
+                </span>
+                <span className="font-semibold text-navy">(813) 655-4501</span>
               </span>
             </a>
             <a
-              href="mailto:info@hhhworks.com"
-              className="flex items-center gap-3 rounded-2xl border border-neutral-200 bg-neutral-50 px-5 py-4 transition hover:border-sky-300/60 hover:bg-sky-50/50"
+              href="mailto:triplehair@gmail.com"
+              className="flex min-w-[10rem] flex-1 items-center gap-3 rounded-2xl border border-navy/10 bg-page px-4 py-4 transition hover:border-brand-red/40"
             >
-              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-sky-100 text-sky-700">
-                <i className="fa-solid fa-envelope" aria-hidden />
+              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-red text-surface">
+                <i className="fa-solid fa-envelope text-sm" aria-hidden />
               </span>
-              <span>
-                <span className="block text-[10px] uppercase tracking-wider text-neutral-500">Email</span>
-                <span className="font-semibold text-neutral-900">info@hhhworks.com</span>
+              <span className="min-w-0">
+                <span className="block text-[10px] font-semibold uppercase tracking-wider text-muted">
+                  Email
+                </span>
+                <span className="break-all font-semibold text-navy">triplehair@gmail.com</span>
               </span>
             </a>
           </div>
 
-          <div className="mt-14 border-t border-neutral-200 pt-14">
-            <h2 className="text-xs font-semibold uppercase tracking-[0.25em] text-neutral-500">
-              Message
-            </h2>
-            <div className="mt-6">
+          <p className="mt-6 text-sm text-muted">
+            <span className="font-semibold text-navy">Based in Brandon, FL</span>
+            —serving Tampa Bay counties.{" "}
+            <Link href="/areas" className="font-medium text-brand-red hover:underline">
+              See cities
+            </Link>
+          </p>
+
+          <div className="mt-10 border-t border-navy/10 pt-10">
+            <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-red">Request service</h2>
+            <div className="mt-5">
               <ContactForm />
             </div>
           </div>

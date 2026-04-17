@@ -5,121 +5,107 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "AC & heating installation, repair, tune-ups, duct cleaning, dryer vent cleaning, and membership plans across Tampa Bay.",
+    "HVAC repairs, replacement, maintenance, tune-ups, duct cleaning, and new construction installs—Triple H, Tampa Bay.",
 };
 
-const services = [
+const blocks = [
   {
-    title: "Installation",
-    desc: "Right-sized systems, clean duct connections, and startups tested to factory specs.",
-    img: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&q=80&w=1200",
-    span: "md:col-span-2 md:row-span-1",
+    title: "HVAC repairs",
+    text: "Fast diagnosis, clear options, and repairs on all major brands.",
+    img: "https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&q=80&w=1200",
   },
   {
-    title: "Repair & diagnostics",
-    desc: "All brands—clear findings, flat-rate options, and parts that last.",
-    img: "https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&q=80&w=900",
-    span: "",
+    title: "Replacement",
+    text: "When it’s time for a new system—we size it right and handle removal to startup.",
+    img: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&q=80&w=1200",
+  },
+  {
+    title: "Maintenance",
+    text: "Scheduled care that catches wear early and keeps efficiency up.",
+    img: "https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&q=80&w=1200",
   },
   {
     title: "Tune-ups",
-    desc: "Seasonal checks: refrigerant, coils, drains, electrical—fewer surprise failures.",
-    img: "https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&q=80&w=900",
-    span: "",
+    text: "Seasonal checks—coils, drains, electrical, refrigerant—so summer isn’t a gamble.",
+    img: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&q=80&w=1200",
   },
   {
     title: "Duct cleaning",
-    desc: "Whole-home airflow and air quality—priced per vent and air handler.",
+    text: "Cleaner ducts support airflow, efficiency, and healthier indoor air.",
     img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=1200",
-    span: "md:col-span-2",
   },
   {
-    title: "Dryer vent cleaning",
-    desc: "Safer, faster drying—professional vent cleaning you can trust.",
-    img: "https://images.unsplash.com/photo-1582735689369-4fe89db7114c?auto=format&fit=crop&q=80&w=900",
-    span: "",
-  },
-  {
-    title: "Reliance Membership",
-    desc: "Priority scheduling, tune-ups, and savings on repairs & equipment.",
-    img: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&q=80&w=900",
-    span: "",
+    title: "Construction installs",
+    text: "New builds and major remodels—we coordinate with your timeline and trades.",
+    img: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&q=80&w=1200",
   },
 ];
 
 export default function ServicesPage() {
   return (
     <main>
-      <section className="relative overflow-hidden border-b border-neutral-200 grain bg-neutral-50">
-        <div className="absolute inset-0">
+      <section className="relative overflow-hidden border-b border-navy/10 bg-navy-deep">
+        <div className="absolute inset-0 opacity-30">
           <Image
             src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&q=85&w=2400"
             alt=""
             fill
-            className="object-cover opacity-30"
+            className="object-cover"
             sizes="100vw"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-white via-white/92 to-neutral-50" />
         </div>
-        <div className="relative z-[1] mx-auto max-w-[1400px] px-5 py-24 md:px-8 md:py-32 lg:px-10">
-          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-amber-700">What we do</p>
-          <h1 className="font-display mt-4 max-w-[12ch] text-5xl font-semibold tracking-tight text-neutral-900 md:text-7xl">
-            Services
+        <div className="absolute inset-0 bg-gradient-to-r from-navy-deep via-navy-deep/95 to-navy/80" />
+        <div className="relative z-[1] mx-auto max-w-[1400px] px-5 py-20 md:px-8 md:py-28 lg:px-10">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-red">Services</p>
+          <h1 className="font-display mt-3 max-w-xl text-4xl font-semibold tracking-tight text-surface md:text-6xl">
+            Everything your building needs to breathe easy.
           </h1>
-          <p className="mt-8 max-w-xl text-lg text-neutral-600">
-            Full-service HVAC for homes and businesses—scheduled maintenance, emergency response, and
-            installs that look as good as they perform.
+          <p className="mt-6 max-w-lg text-lg text-surface/80">
+            Residential and commercial—from quick fixes to full changeouts.
           </p>
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1400px] bg-neutral-50 px-5 py-20 md:px-8 lg:px-10 lg:py-28">
-        <div className="grid auto-rows-[minmax(220px,auto)] gap-4 md:grid-cols-3">
-          {services.map((s) => (
+      <section className="mx-auto max-w-[1400px] bg-page px-5 py-16 md:px-8 lg:px-10 lg:py-24">
+        <div className="grid gap-6 md:grid-cols-2">
+          {blocks.map((b) => (
             <article
-              key={s.title}
-              className={`group relative min-h-[320px] overflow-hidden rounded-3xl border border-neutral-200 bg-white shadow-sm md:min-h-[380px] ${s.span}`}
+              key={b.title}
+              className="overflow-hidden rounded-2xl border border-navy/10 bg-surface shadow-sm"
             >
-              <div className="relative aspect-[16/10] md:aspect-auto md:absolute md:inset-0 md:h-full">
-                <Image
-                  src={s.img}
-                  alt=""
-                  fill
-                  className="object-cover opacity-95 transition duration-700 group-hover:scale-105 group-hover:opacity-100"
-                  sizes="(min-width: 768px) 33vw, 100vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/90 via-neutral-900/35 to-transparent md:from-neutral-900/92" />
+              <div className="relative aspect-[16/9] w-full">
+                <Image src={b.img} alt="" fill className="object-cover" sizes="(min-width: 768px) 50vw, 100vw" />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/90 to-transparent" />
+                <h2 className="font-display absolute bottom-4 left-5 text-2xl font-semibold text-surface">
+                  {b.title}
+                </h2>
               </div>
-              <div className="relative z-[1] p-8 md:absolute md:inset-0 md:flex md:flex-col md:justify-end">
-                <h2 className="font-display text-2xl font-semibold text-white md:text-3xl">{s.title}</h2>
-                <p className="mt-3 max-w-md text-sm leading-relaxed text-neutral-200">{s.desc}</p>
-              </div>
+              <p className="p-6 text-sm leading-relaxed text-muted">{b.text}</p>
             </article>
           ))}
         </div>
 
-        <div className="mt-20 flex flex-col items-start justify-between gap-8 rounded-3xl border border-amber-200/80 bg-gradient-to-br from-amber-50 to-white p-10 shadow-sm md:flex-row md:items-center">
+        <div className="mt-16 rounded-2xl border border-brand-red/30 bg-surface p-8 text-center shadow-sm md:flex md:items-center md:justify-between md:text-left">
           <div>
-            <p className="font-display text-2xl font-medium text-neutral-900">Need something urgent?</p>
-            <p className="mt-2 text-neutral-600">Emergency line—nights, weekends, holidays.</p>
+            <p className="font-display text-xl font-semibold text-navy">Need a quote?</p>
+            <p className="mt-1 text-sm text-muted">Tell us what you’re dealing with—we’ll line up a visit.</p>
           </div>
-          <a
-            href="tel:+18136554501"
-            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 px-8 py-4 text-sm font-bold uppercase tracking-wider text-white shadow-md shadow-amber-500/25"
-          >
-            <i className="fa-solid fa-bolt" aria-hidden />
-            (813) 655-4501
-          </a>
+          <div className="mt-6 flex flex-wrap justify-center gap-3 md:mt-0">
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center rounded-full bg-brand-red px-7 py-3 text-sm font-bold uppercase tracking-wide text-white transition hover:bg-brand-red-hover"
+            >
+              Contact us
+            </Link>
+            <a
+              href="tel:+18136554501"
+              className="inline-flex items-center justify-center rounded-full border border-navy/15 px-7 py-3 text-sm font-semibold text-navy transition hover:bg-page"
+            >
+              (813) 655-4501
+            </a>
+          </div>
         </div>
-
-        <p className="mt-16 text-center text-sm text-neutral-500">
-          Ready to book?{" "}
-          <Link href="/contact" className="font-medium text-sky-700 hover:text-sky-800">
-            Send a message
-          </Link>{" "}
-          or call—we&rsquo;ll line you up.
-        </p>
       </section>
     </main>
   );

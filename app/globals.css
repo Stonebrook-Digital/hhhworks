@@ -1,14 +1,16 @@
 @import "tailwindcss";
 
 @theme inline {
-  --font-display: var(--font-syne);
-  --font-sans: var(--font-dm);
-  --color-surface: #fafafa;
-  --color-surface-2: #ffffff;
-  --color-ink: #171717;
-  --color-muted: #525252;
-  --color-accent: #b45309;
-  --color-accent-2: #0369a1;
+  /* --font-display and --font-sans come from next/font on <html> */
+  --color-page: #f4f6fb;
+  --color-surface: #ffffff;
+  --color-navy: #1a2540;
+  --color-navy-muted: #3d4d6e;
+  --color-navy-deep: #121a2e;
+  --color-brand-red: #d91f2d;
+  --color-brand-red-hover: #b81824;
+  --color-ink: #1a2540;
+  --color-muted: #5c6785;
 }
 
 @layer base {
@@ -16,12 +18,12 @@
     scroll-behavior: smooth;
   }
   ::selection {
-    background: rgba(180, 83, 9, 0.18);
-    color: #171717;
+    background: rgba(217, 31, 45, 0.15);
+    color: var(--color-navy-deep);
   }
 }
 
-/* Subtle grain — lighter on white */
+/* Subtle grain */
 .grain {
   position: relative;
 }
@@ -30,21 +32,10 @@
   pointer-events: none;
   position: absolute;
   inset: 0;
-  opacity: 0.04;
+  opacity: 0.035;
   mix-blend-mode: multiply;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   z-index: 2;
-}
-
-@keyframes rise {
-  from {
-    opacity: 0;
-    transform: translateY(28px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 @keyframes rise-soft {
@@ -67,39 +58,52 @@
   }
 }
 
-.animate-rise {
-  animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
 .animate-rise-soft {
   animation: rise-soft 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 .delay-1 {
-  animation-delay: 0.1s;
+  animation-delay: 0.08s;
   opacity: 0;
 }
 .delay-2 {
-  animation-delay: 0.2s;
+  animation-delay: 0.16s;
   opacity: 0;
 }
 .delay-3 {
-  animation-delay: 0.28s;
+  animation-delay: 0.24s;
   opacity: 0;
 }
 .delay-4 {
-  animation-delay: 0.36s;
+  animation-delay: 0.32s;
   opacity: 0;
 }
 
 .marquee-track {
-  animation: marquee 32s linear infinite;
+  animation: marquee 28s linear infinite;
 }
 
-.clip-diagonal {
-  clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);
+/* Hero background — slow zoom on the active slide */
+@keyframes hero-ken {
+  from {
+    transform: scale(1.04);
+  }
+  to {
+    transform: scale(1.1);
+  }
+}
+
+.animate-hero-ken {
+  animation: hero-ken 14s ease-in-out infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-ken {
+    animation: none;
+  }
 }
 
 @layer components {
   .font-display {
-    font-family: var(--font-syne), ui-sans-serif, system-ui;
+    font-family: var(--font-display), ui-serif, Georgia, serif;
   }
 }

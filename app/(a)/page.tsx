@@ -1,227 +1,203 @@
 import Image from "next/image";
 import Link from "next/link";
+import { HeroMedia, type HeroSlide } from "@/app/components/HeroMedia";
 
-/** Bright modern interior — not the condenser hero */
-const heroImg =
-  "https://images.unsplash.com/photo-1600585154084-4e5fe7c39198?auto=format&fit=crop&q=85&w=2400";
-const splitImg =
-  "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&q=85&w=1800";
-const cardA =
-  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1200";
-const cardB =
-  "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=80&w=1200";
+const HERO_SLIDES: HeroSlide[] = [
+  {
+    src: "https://images.unsplash.com/photo-1600585154084-4e5fe7c39198?auto=format&fit=crop&q=85&w=2400",
+    alt: "Bright, modern living space with natural light",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&q=85&w=2400",
+    alt: "Contemporary home exterior at dusk",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&q=85&w=2400",
+    alt: "Comfortable sunlit interior",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&q=85&w=2400",
+    alt: "Outdoor HVAC equipment installation",
+  },
+];
+
+const services = [
+  { title: "Repairs", blurb: "All brands, clear diagnosis, flat-rate options.", icon: "fa-screwdriver-wrench" },
+  { title: "Replacement", blurb: "Right-sized systems and clean changeouts.", icon: "fa-fan" },
+  { title: "Maintenance", blurb: "Scheduled care, fewer surprises.", icon: "fa-clipboard-check" },
+  { title: "Tune-ups", blurb: "Season-ready performance checks.", icon: "fa-gauge-high" },
+  { title: "Duct cleaning", blurb: "Better airflow and indoor air.", icon: "fa-wind" },
+  { title: "New construction", blurb: "HVAC coordinated with your build.", icon: "fa-helmet-safety" },
+] as const;
 
 export default function HomePage() {
   return (
     <main>
-      {/* Hero — photo stays visible; readability from a side scrim only (no full white wash) */}
-      <section className="relative min-h-[calc(100vh-4.25rem)] overflow-hidden grain">
-        <Image
-          src={heroImg}
-          alt="Bright, modern living space"
-          fill
-          priority
-          className="object-cover object-center"
-          sizes="100vw"
-        />
-        {/* Desktop: soft scrim on the left where type sits */}
-        <div
-          className="pointer-events-none absolute inset-y-0 left-0 hidden w-[min(100%,42rem)] bg-gradient-to-r from-white/92 via-white/55 to-transparent md:block"
-          aria-hidden
-        />
-        {/* Mobile: light fade from bottom so headline stays readable */}
-        <div
-          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-white via-white/25 to-transparent md:hidden"
-          aria-hidden
-        />
-        <div className="relative z-[3] mx-auto flex min-h-[calc(100vh-4.25rem)] max-w-[1400px] flex-col justify-end px-5 pb-20 pt-16 md:px-8 lg:px-10 lg:pb-28">
-          <p className="animate-rise delay-1 font-display text-xs font-semibold uppercase tracking-[0.35em] text-amber-700">
-            Tampa Bay · Since 2004
-          </p>
-          <h1 className="animate-rise delay-2 font-display mt-4 max-w-[14ch] text-5xl font-semibold leading-[0.95] tracking-tight text-neutral-900 md:text-7xl lg:text-8xl">
-            Cold air.
-            <br />
-            <span className="bg-gradient-to-r from-amber-700 via-neutral-800 to-neutral-600 bg-clip-text text-transparent">
-              Warm service.
-            </span>
-          </h1>
-          <p className="animate-rise delay-3 mt-8 max-w-xl text-lg leading-relaxed text-neutral-700 md:text-xl md:drop-shadow-sm">
-            Installations, repairs, and flat-rate pricing—so you always know the number before we
-            touch a tool.
-          </p>
-          <div className="animate-rise delay-4 mt-10 flex flex-wrap gap-4">
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 px-8 py-4 text-sm font-bold uppercase tracking-[0.15em] text-white shadow-lg shadow-amber-500/30 transition hover:brightness-105"
-            >
-              Get a quote
-              <i className="fa-solid fa-arrow-right -mr-1 text-xs" aria-hidden />
-            </Link>
-            <Link
-              href="/gallery"
-              className="inline-flex items-center gap-2 rounded-full border border-neutral-300 bg-white/95 px-8 py-4 text-sm font-semibold text-neutral-800 shadow-md backdrop-blur-sm transition hover:bg-white"
-            >
-              View gallery
-            </Link>
+      <section className="relative min-h-[min(100dvh,52rem)] overflow-hidden grain">
+        <HeroMedia slides={HERO_SLIDES} />
+
+        <div className="relative z-10 mx-auto flex min-h-[min(100dvh,52rem)] max-w-[1400px] flex-col px-5 pb-28 pt-20 md:px-8 md:pb-24 md:pt-24 lg:flex-row lg:items-stretch lg:gap-12 lg:px-10 lg:pb-20 lg:pt-28">
+          <div className="flex max-w-2xl flex-1 flex-col lg:max-w-none lg:w-[52%]">
+            <div className="animate-rise-soft delay-1 w-full max-w-2xl rounded-2xl border border-white/25 bg-white/[0.94] px-7 py-6 shadow-2xl shadow-black/25 backdrop-blur-md md:px-10 md:py-8">
+              <Image
+                src="/triple-h-logo.png"
+                alt="Triple H Air Conditioning, Inc."
+                width={480}
+                height={120}
+                className="h-auto w-full"
+                priority
+                sizes="(min-width: 1024px) 36rem, 90vw"
+              />
+            </div>
+            <p className="animate-rise-soft delay-2 mt-8 text-sm font-semibold uppercase tracking-[0.25em] text-brand-red drop-shadow-md">
+              Tampa Bay · Since 2004
+            </p>
+            <h1 className="animate-rise-soft delay-3 font-display mt-4 max-w-xl text-4xl font-semibold leading-[1.08] tracking-tight text-surface drop-shadow-md md:text-5xl lg:text-[2.85rem]">
+              Comfort you can feel. Pricing you can trust.
+            </h1>
+            <p className="animate-rise-soft delay-3 mt-5 max-w-lg text-lg text-surface/90 drop-shadow">
+              Install, repair, and maintain—flat-rate quotes before we pick up a tool.
+            </p>
+            <div className="animate-rise-soft delay-4 mt-10 flex flex-wrap gap-3">
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 rounded-full bg-brand-red px-7 py-3.5 text-sm font-bold uppercase tracking-wide text-white shadow-lg shadow-black/25 transition hover:scale-[1.02] hover:bg-brand-red-hover active:scale-[0.98]"
+              >
+                Free estimate
+                <i className="fa-solid fa-arrow-right text-xs" aria-hidden />
+              </Link>
+              <a
+                href="tel:+18136554501"
+                className="inline-flex items-center gap-2 rounded-full border border-surface/30 bg-surface/15 px-7 py-3.5 text-sm font-semibold text-surface backdrop-blur-sm transition hover:scale-[1.02] hover:bg-surface/25 active:scale-[0.98]"
+              >
+                <i className="fa-solid fa-phone text-xs" aria-hidden />
+                (813) 655-4501
+              </a>
+            </div>
+          </div>
+
+          <div className="mt-12 flex flex-1 flex-col justify-end lg:mt-0 lg:justify-center">
+            <div className="rounded-2xl border border-white/25 bg-navy-deep/95 p-7 shadow-xl lg:max-w-md lg:ml-auto">
+              <p className="font-display text-xl font-medium leading-snug text-surface md:text-2xl">
+                &ldquo;They stuck to the quote and did solid work across three commercial
+                buildings.&rdquo;
+              </p>
+              <p className="mt-4 text-sm font-semibold text-brand-red">Ada</p>
+              <Link
+                href="/reviews"
+                className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-surface/85 transition hover:gap-3 hover:text-surface"
+              >
+                Read reviews
+                <i className="fa-solid fa-arrow-right text-xs" aria-hidden />
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Marquee */}
-      <div className="border-y border-neutral-200 bg-white py-4 overflow-hidden">
-        <div className="marquee-track flex w-max gap-16 whitespace-nowrap text-xs font-semibold uppercase tracking-[0.4em] text-neutral-400">
+      <div className="border-y border-navy/10 bg-surface py-3.5 overflow-hidden">
+        <div className="marquee-track flex w-max gap-12 whitespace-nowrap text-[11px] font-semibold uppercase tracking-[0.28em] text-navy-muted">
           {Array.from({ length: 2 }).map((_, i) => (
-            <span key={i} className="flex gap-16">
+            <span key={i} className="flex gap-12">
               <span>Flat-rate pricing</span>
-              <span className="text-amber-500">·</span>
-              <span>24/7 emergency</span>
-              <span className="text-amber-500">·</span>
+              <span className="text-brand-red">·</span>
               <span>All major brands</span>
-              <span className="text-amber-500">·</span>
-              <span>Tampa Bay owned</span>
-              <span className="text-amber-500">·</span>
+              <span className="text-brand-red">·</span>
+              <span>Tampa Bay</span>
+              <span className="text-brand-red">·</span>
+              <span>Residential &amp; commercial</span>
+              <span className="text-brand-red">·</span>
             </span>
           ))}
         </div>
       </div>
 
-      {/* Split — full-bleed photo; quote sits in its own card below (nothing layered on the image) */}
-      <section className="relative bg-neutral-50">
-        <div className="mx-auto max-w-[1400px] px-5 py-24 md:px-8 lg:grid lg:grid-cols-2 lg:items-start lg:gap-16 lg:px-10 lg:py-32">
-          <div className="flex flex-col gap-6">
-            <div className="relative min-h-[320px] overflow-hidden rounded-[2rem] shadow-xl ring-1 ring-neutral-200/80 lg:min-h-[420px]">
-              <Image
-                src={splitImg}
-                alt="Comfortable sunlit interior"
-                fill
-                className="object-cover"
-                sizes="(min-width: 1024px) 50vw, 100vw"
-              />
-            </div>
-            <blockquote className="rounded-2xl border border-neutral-200 bg-white p-8 shadow-sm">
-              <p className="font-display text-xl font-medium leading-snug text-neutral-800 md:text-2xl">
-                &ldquo;We show up stocked, explain the fix, and stand behind every install.&rdquo;
-              </p>
-            </blockquote>
-          </div>
-          <div className="mt-14 flex flex-col justify-center lg:mt-0">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-amber-700">
-              Why Triple H
-            </p>
-            <h2 className="font-display mt-4 text-4xl font-semibold tracking-tight text-neutral-900 md:text-5xl">
-              Built for Florida heat—not generic templates.
+      <section className="bg-page px-5 py-16 md:px-8 lg:px-10 lg:py-24">
+        <div className="mx-auto max-w-[1400px]">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="font-display text-3xl font-semibold tracking-tight text-navy md:text-4xl">
+              Why homeowners call us
             </h2>
-            <p className="mt-6 text-lg leading-relaxed text-neutral-600">
-              From Pasco to Manatee, homeowners call us when they want clear pricing, technicians who
-              respect the home, and systems tuned to factory specs.
-            </p>
-            <ul className="mt-10 space-y-4 text-neutral-700">
-              {[
-                "Flat-rate system—price before the wrench turns",
-                "Fully stocked trucks for faster fixes",
-                "Reliance Membership for tune-ups & priority scheduling",
-              ].map((t) => (
-                <li key={t} className="flex gap-3">
-                  <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-amber-100 text-amber-700">
-                    <i className="fa-solid fa-check text-[10px]" aria-hidden />
-                  </span>
-                  {t}
-                </li>
-              ))}
-            </ul>
+            <p className="mt-3 text-muted">Short visits, long-term thinking—no filler, no hourly games.</p>
+          </div>
+          <ul className="mt-12 grid gap-4 sm:grid-cols-3">
+            {[
+              { t: "Quote first", d: "You approve the number before we start." },
+              { t: "Stocked trucks", d: "More first-visit fixes, fewer return trips." },
+              { t: "Bay-wide", d: "Hillsborough to Manatee—see Areas for cities." },
+            ].map((x) => (
+              <li
+                key={x.t}
+                className="rounded-2xl border border-navy/10 bg-surface p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+              >
+                <p className="font-display text-lg font-semibold text-navy">{x.t}</p>
+                <p className="mt-2 text-sm leading-relaxed text-muted">{x.d}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="border-t border-navy/10 bg-surface py-8 md:py-11">
+        <div className="mx-auto max-w-[1400px] px-5 md:px-8 lg:px-10">
+          <div className="flex items-center justify-between gap-3">
+            <div>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-brand-red">What we do</p>
+              <h2 className="font-display mt-0.5 text-xl font-semibold tracking-tight text-navy md:text-2xl">
+                HVAC services
+              </h2>
+            </div>
             <Link
-              href="/about"
-              className="mt-12 inline-flex items-center gap-2 text-sm font-semibold text-sky-700 transition hover:text-sky-800"
+              href="/contact"
+              className="shrink-0 rounded-full bg-brand-red px-5 py-2.5 text-xs font-bold uppercase tracking-wide text-white transition hover:bg-brand-red-hover"
             >
-              Our story
-              <i className="fa-solid fa-arrow-right text-xs" aria-hidden />
+              Schedule
             </Link>
           </div>
-        </div>
-      </section>
 
-      {/* Image cards */}
-      <section className="border-t border-neutral-200 bg-white py-24 md:py-32">
-        <div className="mx-auto max-w-[1400px] px-5 md:px-8 lg:px-10">
-          <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-            <div>
-              <h2 className="font-display text-4xl font-semibold tracking-tight text-neutral-900 md:text-5xl">
-                Comfort, elevated.
-              </h2>
-              <p className="mt-4 max-w-lg text-neutral-600">
-                A glimpse at the kind of spaces we keep cool—clean installs, modern systems, and
-                attention to detail.
-              </p>
-            </div>
-            <div className="flex flex-wrap gap-3">
-              <Link
-                href="/gallery"
-                className="shrink-0 rounded-full border border-neutral-300 bg-white px-6 py-3 text-sm font-semibold text-neutral-800 shadow-sm transition hover:bg-neutral-50"
-              >
-                Full gallery
-              </Link>
-              <Link
-                href="/services"
-                className="shrink-0 rounded-full border border-amber-200 bg-amber-50 px-6 py-3 text-sm font-semibold text-amber-900 shadow-sm transition hover:bg-amber-100"
-              >
-                Services
-              </Link>
-            </div>
-          </div>
-          <div className="mt-14 grid gap-6 md:grid-cols-2">
-            <div className="group relative aspect-[16/11] overflow-hidden rounded-3xl shadow-lg ring-1 ring-neutral-200/80">
-              <Image
-                src={cardA}
-                alt="Modern home exterior"
-                fill
-                className="object-cover transition duration-700 group-hover:scale-105"
-                sizes="(min-width: 768px) 50vw, 100vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/75 via-neutral-900/10 to-transparent" />
-              <span className="absolute bottom-6 left-6 font-display text-xl font-medium text-white">
-                Residential
-              </span>
-            </div>
-            <div className="group relative aspect-[16/11] overflow-hidden rounded-3xl shadow-lg ring-1 ring-neutral-200/80 md:mt-12">
-              <Image
-                src={cardB}
-                alt="Bright open interior with natural light"
-                fill
-                className="object-cover transition duration-700 group-hover:scale-105"
-                sizes="(min-width: 768px) 50vw, 100vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/75 via-neutral-900/10 to-transparent" />
-              <span className="absolute bottom-6 left-6 font-display text-xl font-medium text-white">
-                Light &amp; air
-              </span>
-            </div>
-          </div>
-        </div>
-      </section>
+          <ul className="mt-6 grid gap-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3 lg:gap-10">
+            {services.map((s) => (
+              <li key={s.title} className="flex gap-3 sm:gap-4">
+                <span className="shrink-0 text-brand-red" aria-hidden>
+                  <i className={`fa-solid ${s.icon} text-2xl sm:text-[1.75rem]`} />
+                </span>
+                <div className="min-w-0">
+                  <p className="font-display text-sm font-semibold leading-tight text-navy sm:text-base">
+                    {s.title}
+                  </p>
+                  <p className="mt-1 text-xs leading-snug text-muted sm:text-sm">{s.blurb}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
 
-      {/* CTA band — no photo multiply layer */}
-      <section className="relative overflow-hidden py-24 md:py-32 grain">
-        <div className="absolute inset-0 bg-gradient-to-br from-sky-50 via-white to-amber-50" />
-        <div className="pointer-events-none absolute -right-24 top-1/2 h-96 w-96 -translate-y-1/2 rounded-full bg-amber-200/25 blur-3xl" aria-hidden />
-        <div className="pointer-events-none absolute -left-24 bottom-0 h-80 w-80 rounded-full bg-sky-200/30 blur-3xl" aria-hidden />
-        <div className="relative z-[1] mx-auto max-w-[1400px] px-5 text-center md:px-8 lg:px-10">
-          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-sky-700">
-            Ready when you are
+          <p className="mt-3 text-center text-[11px] text-muted">
+            <Link href="/services" className="font-semibold text-brand-red hover:underline">
+              All services
+            </Link>
           </p>
-          <h2 className="font-display mx-auto mt-6 max-w-3xl text-4xl font-semibold leading-tight text-neutral-900 md:text-6xl">
-            Let&rsquo;s make your space feel right.
-          </h2>
-          <div className="mt-12 flex flex-wrap justify-center gap-4">
+        </div>
+      </section>
+
+      <section className="bg-navy px-5 py-16 text-surface md:px-8 lg:px-10 lg:py-20">
+        <div className="mx-auto max-w-[1400px] md:flex md:items-center md:justify-between md:gap-12">
+          <div className="max-w-xl">
+            <h2 className="font-display text-2xl font-semibold md:text-3xl">Ready for reliable comfort?</h2>
+            <p className="mt-3 text-surface/75">
+              Call now or send a message—we&apos;ll follow up with next steps.
+            </p>
+          </div>
+          <div className="mt-8 flex flex-wrap gap-3 md:mt-0 md:justify-end">
             <a
               href="tel:+18136554501"
-              className="inline-flex items-center gap-2 rounded-full bg-neutral-900 px-8 py-4 text-sm font-bold uppercase tracking-wider text-white shadow-lg transition hover:bg-neutral-800"
+              className="inline-flex items-center gap-2 rounded-full bg-brand-red px-7 py-3.5 text-sm font-bold uppercase tracking-wide text-white transition hover:scale-[1.03] hover:bg-brand-red-hover active:scale-[0.98]"
             >
               <i className="fa-solid fa-phone" aria-hidden />
-              Call now
+              Call (813) 655-4501
             </a>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 rounded-full border border-neutral-300 bg-white px-8 py-4 text-sm font-semibold text-neutral-800 shadow-sm transition hover:bg-neutral-50"
+              className="inline-flex items-center gap-2 rounded-full border border-surface/30 px-7 py-3.5 text-sm font-semibold text-surface transition hover:bg-surface/10"
             >
               Contact form
             </Link>
