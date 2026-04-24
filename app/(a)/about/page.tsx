@@ -54,17 +54,17 @@ export default function AboutPage() {
     <main className="bg-page">
       <section className="relative overflow-hidden bg-navy-deep text-surface">
         <div
-          className="pointer-events-none absolute -right-24 top-0 h-[28rem] w-[28rem] rounded-full bg-brand-red/12 blur-3xl"
+          className="pointer-events-none absolute -right-24 top-0 h-[28rem] w-[28rem] rounded-full bg-white/[0.04] blur-3xl"
           aria-hidden
         />
         <div
-          className="pointer-events-none absolute -left-32 bottom-0 h-80 w-80 rounded-full bg-navy/60 blur-3xl"
+          className="pointer-events-none absolute -left-32 bottom-0 h-80 w-80 rounded-full bg-navy/50 blur-3xl"
           aria-hidden
         />
-        <div className="relative mx-auto max-w-[1400px] px-5 py-16 md:px-8 md:py-24 lg:px-10 lg:py-28">
+        <div className="relative mx-auto max-w-[1320px] px-4 py-16 sm:px-6 md:py-20 lg:px-8 lg:py-28">
           <div className="flex flex-wrap items-center gap-3">
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-red">About</p>
-            <span className="rounded-full border border-brand-red/50 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-brand-red">
+            <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-surface/45">About</p>
+            <span className="rounded-full border border-white/12 px-3 py-1 text-[11px] font-medium text-surface/80">
               Est. 2004
             </span>
           </div>
@@ -78,9 +78,9 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="border-b border-navy/10 bg-surface">
-        <div className="mx-auto max-w-[1400px] px-5 py-12 md:px-8 lg:px-10 lg:py-16">
-          <blockquote className="relative mx-auto max-w-4xl border-l-4 border-brand-red pl-6 md:pl-10">
+      <section className="border-b border-navy/6 bg-surface">
+        <div className="mx-auto max-w-[1320px] px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+          <blockquote className="relative mx-auto max-w-4xl border-l-2 border-navy/15 pl-6 md:pl-10">
             <p className="font-display text-xl font-medium leading-snug text-navy md:text-2xl">
               Our journey began with a mission to provide unparalleled service that we would expect
               in our homes.
@@ -89,17 +89,17 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <div className="mx-auto max-w-[1400px] px-5 md:px-8 lg:px-10">
+      <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
         {sections.map((s, i) => (
           <section
             key={s.id}
             id={s.id}
-            className={`flex flex-col gap-8 border-b border-navy/10 py-14 md:flex-row md:items-start md:gap-16 md:py-20 lg:gap-24 ${
+            className={`flex flex-col gap-8 border-b border-navy/6 py-14 md:flex-row md:items-start md:gap-16 md:py-20 lg:gap-24 ${
               i % 2 === 1 ? "md:flex-row-reverse" : ""
             }`}
           >
             <div className={`md:w-[42%] lg:w-[38%] ${i % 2 === 1 ? "md:pt-1 md:text-right" : ""}`}>
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-brand-red">{s.kicker}</p>
+              <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-navy-muted">{s.kicker}</p>
               <h2 className="font-display mt-3 text-2xl font-semibold tracking-tight text-navy sm:text-3xl md:text-[1.75rem] md:leading-snug lg:text-4xl">
                 {s.title}
               </h2>
@@ -114,8 +114,8 @@ export default function AboutPage() {
       </div>
 
       <section className="bg-navy text-surface">
-        <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-8 md:py-20 lg:px-10">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-brand-red">Gratitude</p>
+        <div className="mx-auto max-w-[1320px] px-4 py-16 sm:px-6 md:py-20 lg:px-8">
+          <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-surface/45">Gratitude</p>
           <h2 className="font-display mt-4 max-w-4xl text-2xl font-semibold leading-tight sm:text-3xl md:text-4xl">
             {thankingTitle}
           </h2>
@@ -127,30 +127,30 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="border-t border-navy/10 bg-surface">
-        <div className="mx-auto flex max-w-[1400px] flex-col items-start justify-between gap-8 px-5 py-12 md:flex-row md:items-center md:px-8 md:py-14 lg:px-10">
+      <section className="border-t border-navy/6 bg-surface">
+        <div className="mx-auto flex max-w-[1320px] flex-col items-start justify-between gap-8 px-4 py-12 sm:px-6 md:flex-row md:items-center md:py-14 lg:px-8">
           <div>
             <p className="font-display text-xl font-semibold text-navy md:text-2xl">Ready when you are.</p>
             <p className="mt-2 max-w-md text-sm text-muted">
               Hillsborough · Pinellas · Polk · Pasco · Northern Manatee
             </p>
           </div>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-2.5">
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 rounded-full bg-brand-red px-6 py-3 text-sm font-bold uppercase tracking-wide text-white transition hover:bg-brand-red-hover"
+              className="inline-flex items-center gap-2 rounded-full bg-brand-red px-6 py-2.5 text-sm font-medium text-white transition hover:bg-brand-red-hover"
             >
               Get an estimate
             </Link>
             <Link
               href="/areas"
-              className="inline-flex items-center gap-2 rounded-full border border-navy/15 px-6 py-3 text-sm font-semibold text-navy transition hover:border-navy/30 hover:bg-page"
+              className="inline-flex items-center gap-2 rounded-full border border-navy/10 bg-page px-6 py-2.5 text-sm font-medium text-navy transition hover:border-navy/18"
             >
               Areas we serve
             </Link>
             <a
               href="tel:+18136554501"
-              className="inline-flex items-center gap-2 rounded-full border border-navy/15 px-6 py-3 text-sm font-semibold text-navy transition hover:border-navy/30 hover:bg-page"
+              className="inline-flex items-center gap-2 rounded-full border border-navy/10 bg-page px-6 py-2.5 text-sm font-medium text-navy transition hover:border-navy/18"
             >
               <i className="fa-solid fa-phone text-xs" aria-hidden />
               (813) 655-4501

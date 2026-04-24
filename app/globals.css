@@ -1,16 +1,18 @@
 @import "tailwindcss";
 
 @theme inline {
-  /* --font-display and --font-sans come from next/font on <html> */
-  --color-page: #f4f6fb;
+  /* --font-display and --font-sans from next/font on <html> */
+  --color-page: #f6f7f9;
   --color-surface: #ffffff;
-  --color-navy: #1a2540;
-  --color-navy-muted: #3d4d6e;
-  --color-navy-deep: #121a2e;
-  --color-brand-red: #d91f2d;
-  --color-brand-red-hover: #b81824;
-  --color-ink: #1a2540;
-  --color-muted: #5c6785;
+  --color-navy: #2a3344;
+  --color-navy-muted: #5c6678;
+  --color-navy-deep: #161c27;
+  --color-brand-red: #b8323a;
+  --color-brand-red-hover: #9a2a31;
+  --color-ink: #2a3344;
+  --color-muted: #6b7280;
+  --color-border: rgb(42 51 68 / 0.08);
+  --color-border-strong: rgb(42 51 68 / 0.12);
 }
 
 @layer base {
@@ -18,30 +20,15 @@
     scroll-behavior: smooth;
   }
   ::selection {
-    background: rgba(217, 31, 45, 0.15);
+    background: rgb(184 50 58 / 0.12);
     color: var(--color-navy-deep);
   }
-}
-
-/* Subtle grain */
-.grain {
-  position: relative;
-}
-.grain::after {
-  content: "";
-  pointer-events: none;
-  position: absolute;
-  inset: 0;
-  opacity: 0.035;
-  mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  z-index: 2;
 }
 
 @keyframes rise-soft {
   from {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
@@ -59,41 +46,47 @@
 }
 
 .animate-rise-soft {
-  animation: rise-soft 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: rise-soft 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 .delay-1 {
-  animation-delay: 0.08s;
+  animation-delay: 0.06s;
   opacity: 0;
 }
 .delay-2 {
-  animation-delay: 0.16s;
+  animation-delay: 0.12s;
   opacity: 0;
 }
 .delay-3 {
-  animation-delay: 0.24s;
+  animation-delay: 0.18s;
   opacity: 0;
 }
 .delay-4 {
-  animation-delay: 0.32s;
+  animation-delay: 0.24s;
   opacity: 0;
 }
 
 .marquee-track {
-  animation: marquee 28s linear infinite;
+  animation: marquee 40s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
 }
 
 /* Hero background — slow zoom on the active slide */
 @keyframes hero-ken {
   from {
-    transform: scale(1.04);
+    transform: scale(1.03);
   }
   to {
-    transform: scale(1.1);
+    transform: scale(1.06);
   }
 }
 
 .animate-hero-ken {
-  animation: hero-ken 14s ease-in-out infinite alternate;
+  animation: hero-ken 18s ease-in-out infinite alternate;
 }
 
 @media (prefers-reduced-motion: reduce) {

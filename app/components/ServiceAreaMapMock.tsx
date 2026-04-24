@@ -13,7 +13,7 @@ export function ServiceAreaMapMock() {
   return (
     <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:items-stretch">
       <div className="flex flex-col gap-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-red">
+        <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-navy-muted">
           Locations
         </p>
         <p className="text-sm text-muted">
@@ -28,13 +28,13 @@ export function ServiceAreaMapMock() {
                 <button
                   type="button"
                   onClick={() => setSelected(loc)}
-                  className={`inline-flex items-center gap-2 rounded-xl border px-3 py-2 text-left text-sm font-medium transition ${
+                  className={`inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-left text-sm font-medium transition ${
                     active
-                      ? "border-brand-red bg-brand-red/10 text-navy"
-                      : "border-navy/15 bg-surface text-navy hover:border-brand-red/40"
+                      ? "border-navy/18 bg-navy/[0.06] text-navy"
+                      : "border-navy/8 bg-surface text-navy hover:border-navy/14"
                   }`}
                 >
-                  <i className="fa-solid fa-location-dot text-brand-red" aria-hidden />
+                  <i className="fa-solid fa-location-dot text-navy-muted" aria-hidden />
                   {loc.name}
                 </button>
               </li>
@@ -43,14 +43,14 @@ export function ServiceAreaMapMock() {
         </ul>
 
         {selected ? (
-          <div className="mt-2 rounded-2xl border border-navy/10 bg-page p-5 shadow-sm">
+          <div className="mt-2 rounded-xl border border-navy/6 bg-page p-5">
             <h3 className="font-display text-lg font-semibold text-navy">{selected.name}</h3>
             <p className="mt-3 text-sm leading-relaxed text-muted">
               <span className="font-semibold text-navy">Our note: </span>
               {selected.workSummary}
             </p>
             <GoogleReviewBadge className="mt-4" starClassName="h-4 w-4" />
-            <blockquote className="mt-3 border-l-4 border-brand-red/60 pl-4">
+            <blockquote className="mt-3 border-l-2 border-navy/12 pl-4">
               <p className="text-sm italic leading-relaxed text-navy">&ldquo;{selected.reviewQuote}&rdquo;</p>
               <footer className="mt-2 text-xs text-muted">
                 <cite className="not-italic font-semibold text-navy">{selected.reviewAuthor}</cite>
@@ -63,7 +63,7 @@ export function ServiceAreaMapMock() {
               href={selected.googleReviewUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-brand-red hover:underline"
+              className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-navy underline decoration-navy/15 underline-offset-4 hover:decoration-navy/35"
             >
               Read on Google
               <i className="fa-solid fa-arrow-up-right-from-square text-xs" aria-hidden />

@@ -20,15 +20,13 @@ export function ContactForm() {
   }
 
   const field =
-    "w-full rounded-xl border border-navy/15 bg-surface px-4 py-3 text-navy outline-none transition placeholder:text-muted focus:border-brand-red focus:ring-2 focus:ring-brand-red/20";
+    "w-full rounded-lg border border-navy/10 bg-page px-4 py-3 text-navy outline-none transition placeholder:text-muted/55 focus:border-navy/20 focus:ring-2 focus:ring-navy/[0.06]";
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="block">
-          <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-navy-muted">
-            Name
-          </span>
+          <span className="mb-1.5 block text-xs font-medium text-navy-muted">Name</span>
           <input
             name="name"
             required
@@ -38,9 +36,7 @@ export function ContactForm() {
           />
         </label>
         <label className="block">
-          <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-navy-muted">
-            Phone
-          </span>
+          <span className="mb-1.5 block text-xs font-medium text-navy-muted">Phone</span>
           <input
             name="phone"
             type="tel"
@@ -52,15 +48,13 @@ export function ContactForm() {
         </label>
       </div>
       <label className="block">
-        <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-navy-muted">
+        <span className="mb-1.5 block text-xs font-medium text-navy-muted">
           Email <span className="font-normal lowercase text-muted">(optional)</span>
         </span>
         <input name="email" type="email" autoComplete="email" className={field} placeholder="you@email.com" />
       </label>
       <label className="block">
-        <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-navy-muted">
-          Interested in
-        </span>
+        <span className="mb-1.5 block text-xs font-medium text-navy-muted">Interested in</span>
         <select name="service" required className={field} defaultValue="">
           <option value="" disabled>
             Select…
@@ -75,9 +69,7 @@ export function ContactForm() {
         </select>
       </label>
       <label className="block">
-        <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-navy-muted">
-          Message
-        </span>
+        <span className="mb-1.5 block text-xs font-medium text-navy-muted">Message</span>
         <textarea
           name="message"
           required
@@ -88,13 +80,13 @@ export function ContactForm() {
       </label>
       <button
         type="submit"
-        className="w-full rounded-xl bg-brand-red py-4 text-sm font-bold uppercase tracking-widest text-white shadow-md shadow-brand-red/25 transition hover:bg-brand-red-hover"
+        className="w-full rounded-lg bg-brand-red py-3.5 text-sm font-medium text-white transition hover:bg-brand-red-hover"
       >
         Send request
       </button>
       <p className="text-center text-xs text-muted">
         Prefer the phone?{" "}
-        <a href="tel:+18136554501" className="font-semibold text-brand-red hover:underline">
+        <a href="tel:+18136554501" className="font-medium text-navy underline decoration-navy/15 underline-offset-4 hover:decoration-navy/35">
           (813) 655-4501
         </a>
       </p>

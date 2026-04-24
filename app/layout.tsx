@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import { DM_Sans, Source_Serif_4 } from "next/font/google";
+import { Cormorant, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
-const sourceSerif = Source_Serif_4({
+const display = Cormorant({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["500", "600", "700"],
 });
 
-const dmSans = DM_Sans({
+const sans = Plus_Jakarta_Sans({
   variable: "--font-sans",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
@@ -31,7 +31,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${sourceSerif.variable} ${dmSans.variable} h-full scroll-smooth`}
+      className={`${display.variable} ${sans.variable} h-full scroll-smooth`}
     >
       <head>
         <link

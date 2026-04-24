@@ -14,7 +14,7 @@ const contactSideImg =
 export default function ContactPage() {
   return (
     <main className="bg-page">
-      <section className="mx-auto grid min-h-[calc(100vh-4.25rem)] max-w-[1600px] lg:grid-cols-2">
+      <section className="mx-auto grid min-h-[calc(100dvh-3.5rem)] max-w-[1600px] lg:grid-cols-2">
         <div className="relative h-48 lg:hidden">
           <Image
             src={contactSideImg}
@@ -36,16 +36,16 @@ export default function ContactPage() {
             priority
           />
           <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-surface to-transparent" />
-          <div className="absolute bottom-10 left-10 max-w-sm rounded-2xl border border-navy/10 bg-surface/95 p-6 shadow-lg backdrop-blur-sm">
+          <div className="absolute bottom-10 left-10 max-w-sm rounded-xl border border-navy/8 bg-surface/92 p-5 shadow-[0_8px_24px_-4px_rgb(0_0_0_/0.08)] backdrop-blur-sm">
             <p className="font-display text-lg font-semibold leading-snug text-navy">
-              Mon–Sat <span className="text-brand-red">7am–7pm</span>
+              Mon–Sat <span className="text-navy-muted">7am–7pm</span>
               <span className="mt-1 block text-sm font-normal text-muted">Sunday closed</span>
             </p>
           </div>
         </div>
 
-        <div className="flex flex-col justify-center bg-surface px-5 py-12 shadow-sm md:px-12 lg:py-20 lg:pl-14 lg:pr-16">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-red">Contact</p>
+        <div className="flex flex-col justify-center bg-surface px-4 py-12 sm:px-8 md:px-12 lg:py-20 lg:pl-14 lg:pr-16">
+          <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-navy-muted">Contact</p>
           <h1 className="font-display mt-2 text-4xl font-semibold tracking-tight text-navy md:text-5xl">
             Let&apos;s talk.
           </h1>
@@ -56,13 +56,13 @@ export default function ContactPage() {
           <div className="mt-8 flex flex-wrap gap-4 text-sm">
             <a
               href="tel:+18136554501"
-              className="flex min-w-[10rem] flex-1 items-center gap-3 rounded-2xl border border-navy/10 bg-page px-4 py-4 transition hover:border-brand-red/40"
+              className="flex min-w-[10rem] flex-1 items-center gap-3 rounded-xl border border-navy/8 bg-page px-4 py-4 transition hover:border-navy/14"
             >
-              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-navy text-surface">
+              <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-navy text-surface">
                 <i className="fa-solid fa-phone text-sm" aria-hidden />
               </span>
               <span>
-                <span className="block text-[10px] font-semibold uppercase tracking-wider text-muted">
+                <span className="block text-[10px] font-medium uppercase tracking-[0.12em] text-muted">
                   Phone
                 </span>
                 <span className="font-semibold text-navy">(813) 655-4501</span>
@@ -70,13 +70,13 @@ export default function ContactPage() {
             </a>
             <a
               href="mailto:triplehair@gmail.com"
-              className="flex min-w-[10rem] flex-1 items-center gap-3 rounded-2xl border border-navy/10 bg-page px-4 py-4 transition hover:border-brand-red/40"
+              className="flex min-w-[10rem] flex-1 items-center gap-3 rounded-xl border border-navy/8 bg-page px-4 py-4 transition hover:border-navy/14"
             >
-              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-red text-surface">
+              <span className="flex h-11 w-11 items-center justify-center rounded-lg border border-navy/10 bg-surface text-navy">
                 <i className="fa-solid fa-envelope text-sm" aria-hidden />
               </span>
               <span className="min-w-0">
-                <span className="block text-[10px] font-semibold uppercase tracking-wider text-muted">
+                <span className="block text-[10px] font-medium uppercase tracking-[0.12em] text-muted">
                   Email
                 </span>
                 <span className="break-all font-semibold text-navy">triplehair@gmail.com</span>
@@ -87,13 +87,13 @@ export default function ContactPage() {
           <p className="mt-6 text-sm text-muted">
             <span className="font-semibold text-navy">Based in Brandon, FL</span>
             —serving Tampa Bay counties.{" "}
-            <Link href="/areas" className="font-medium text-brand-red hover:underline">
+            <Link href="/areas" className="font-medium text-navy underline decoration-navy/15 underline-offset-4 hover:decoration-navy/35">
               See cities
             </Link>
           </p>
 
-          <div className="mt-10 border-t border-navy/10 pt-10">
-            <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-red">Request service</h2>
+          <div className="mt-10 border-t border-navy/6 pt-10">
+            <h2 className="text-[11px] font-medium uppercase tracking-[0.14em] text-navy-muted">Request service</h2>
             <div className="mt-5">
               <ContactForm />
             </div>

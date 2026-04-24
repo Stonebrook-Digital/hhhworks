@@ -9,7 +9,7 @@ export default function DesignALayout({
   return (
     <>
       <Navigation />
-      <div className="pt-[4.25rem]">{children}</div>
+      <div className="pt-14">{children}</div>
       <Footer />
     </>
   );

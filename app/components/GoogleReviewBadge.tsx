@@ -67,12 +67,12 @@ export function GoogleReviewBadge({
 }: GoogleReviewBadgeProps) {
   return (
     <div className={`flex flex-wrap items-center gap-2 ${className}`}>
-      <span className="inline-flex items-center gap-2 rounded-lg border border-navy/10 bg-white px-2 py-1 shadow-sm">
+      <span className="inline-flex items-center gap-2 rounded-md border border-navy/8 bg-surface px-2 py-1">
         <GoogleGMark className="h-6 w-6 shrink-0" />
         <span className="text-[13px] font-medium tracking-tight text-navy/80">Google</span>
       </span>
       <div
-        className="inline-flex items-center gap-px rounded-md bg-white/90 px-1.5 py-0.5 shadow-sm ring-1 ring-black/[0.04]"
+        className="inline-flex items-center gap-px rounded-md border border-navy/6 bg-page px-1.5 py-0.5"
         role="img"
         aria-label={`${score} out of 5 stars`}
       >

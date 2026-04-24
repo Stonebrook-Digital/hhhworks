@@ -65,12 +65,12 @@ export function HeroMedia({ slides, intervalMs = 6500 }: Props) {
         );
       })}
 
-      <div className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-t from-navy-deep/90 via-navy-deep/35 to-navy-deep/25 md:bg-gradient-to-r md:from-navy-deep md:via-navy-deep/88 md:to-navy-deep/20" />
+      <div className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-t from-navy-deep/82 via-navy-deep/28 to-navy-deep/15 md:bg-gradient-to-r md:from-navy-deep/95 md:via-navy-deep/78 md:to-navy-deep/12" />
 
-      <div className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-t from-black/50 to-transparent md:hidden" />
+      <div className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-t from-black/35 to-transparent md:hidden" />
 
-      <div className="absolute bottom-6 left-0 right-0 z-[4] flex items-center justify-center gap-3 px-5 md:justify-start md:pl-10 lg:pl-12">
-        <div className="pointer-events-auto flex items-center gap-2 rounded-full border border-surface/15 bg-navy-deep/40 px-2 py-2 backdrop-blur-md">
+      <div className="absolute right-0 bottom-5 left-0 z-[4] flex items-center justify-center gap-3 px-4 md:justify-start md:pl-8 lg:pl-10">
+        <div className="pointer-events-auto flex items-center gap-1.5 rounded-full border border-white/12 bg-navy-deep/35 px-2 py-1.5 backdrop-blur-md">
           <button
             type="button"
             className="flex h-9 w-9 items-center justify-center rounded-full text-surface/90 transition hover:bg-surface/10 hover:text-surface"
@@ -87,8 +87,8 @@ export function HeroMedia({ slides, intervalMs = 6500 }: Props) {
                 aria-label={`Show image ${idx + 1}`}
                 aria-current={idx === active ? "true" : undefined}
                 onClick={() => setActive(idx)}
-                className={`h-2 rounded-full transition-all duration-300 ${
-                  idx === active ? "w-8 bg-brand-red" : "w-2 bg-surface/35 hover:bg-surface/60"
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  idx === active ? "w-7 bg-surface" : "w-1.5 bg-surface/30 hover:bg-surface/55"
                 }`}
               />
             ))}
