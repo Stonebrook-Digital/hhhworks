@@ -80,7 +80,7 @@ export function ContactForm() {
       </label>
       <button
         type="submit"
-        className="w-full rounded-lg bg-brand-red py-3.5 text-sm font-medium text-white transition hover:bg-brand-red-hover"
+        className="w-full rounded-lg bg-accent py-3.5 text-sm font-medium text-white transition hover:bg-accent-hover"
       >
         Send request
       </button>

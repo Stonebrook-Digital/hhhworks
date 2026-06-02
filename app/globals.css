@@ -1,26 +1,40 @@
 @import "tailwindcss";
 
 @theme inline {
-  /* --font-display and --font-sans from next/font on <html> */
-  --color-page: #f6f7f9;
+  --font-display: var(--font-display), ui-serif, Georgia, serif;
+  --font-sans: var(--font-sans), system-ui, sans-serif;
+
+  --color-page: #f4f5f7;
   --color-surface: #ffffff;
-  --color-navy: #2a3344;
-  --color-navy-muted: #5c6678;
-  --color-navy-deep: #161c27;
-  --color-brand-red: #b8323a;
-  --color-brand-red-hover: #9a2a31;
-  --color-ink: #2a3344;
-  --color-muted: #6b7280;
-  --color-border: rgb(42 51 68 / 0.08);
-  --color-border-strong: rgb(42 51 68 / 0.12);
+  --color-navy: #1e293b;
+  --color-navy-muted: #64748b;
+  --color-navy-deep: #0f172a;
+  --color-brand: #2563eb;
+  --color-brand-hover: #1d4ed8;
+  --color-accent: #dc2626;
+  --color-accent-hover: #b91c1c;
+  --color-muted: #64748b;
+  --color-border: rgb(30 41 59 / 0.08);
+  --color-border-strong: rgb(30 41 59 / 0.14);
+
+  /* Legacy aliases used in components */
+  --color-brand-red: #dc2626;
+  --color-brand-red-hover: #b91c1c;
+  --color-ink: #1e293b;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
   }
+
+  body {
+    @apply bg-page text-navy antialiased;
+    font-family: var(--font-sans);
+  }
+
   ::selection {
-    background: rgb(184 50 58 / 0.12);
+    background: rgb(37 99 235 / 0.14);
     color: var(--color-navy-deep);
   }
 }
@@ -28,7 +42,7 @@
 @keyframes rise-soft {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(14px);
   }
   to {
     opacity: 1;
@@ -36,67 +50,78 @@
   }
 }
 
-@keyframes marquee {
+@keyframes hero-ken {
   from {
-    transform: translateX(0);
+    transform: scale(1.04);
   }
   to {
-    transform: translateX(-50%);
+    transform: scale(1.07);
   }
 }
 
 .animate-rise-soft {
-  animation: rise-soft 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: rise-soft 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
+
 .delay-1 {
-  animation-delay: 0.06s;
+  animation-delay: 0.05s;
   opacity: 0;
 }
 .delay-2 {
-  animation-delay: 0.12s;
+  animation-delay: 0.1s;
   opacity: 0;
 }
 .delay-3 {
-  animation-delay: 0.18s;
+  animation-delay: 0.15s;
   opacity: 0;
 }
 .delay-4 {
-  animation-delay: 0.24s;
+  animation-delay: 0.2s;
   opacity: 0;
 }
 
-.marquee-track {
-  animation: marquee 40s linear infinite;
+.motion-safe\:animate-hero-ken {
+  animation: hero-ken 20s ease-in-out infinite alternate;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .marquee-track {
+  .motion-safe\:animate-hero-ken {
     animation: none;
   }
-}
-
-/* Hero background — slow zoom on the active slide */
-@keyframes hero-ken {
-  from {
-    transform: scale(1.03);
-  }
-  to {
-    transform: scale(1.06);
-  }
-}
-
-.animate-hero-ken {
-  animation: hero-ken 18s ease-in-out infinite alternate;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-hero-ken {
+  .animate-rise-soft {
     animation: none;
+    opacity: 1;
+  }
+  .delay-1,
+  .delay-2,
+  .delay-3,
+  .delay-4 {
+    opacity: 1;
   }
 }
 
 @layer components {
   .font-display {
     font-family: var(--font-display), ui-serif, Georgia, serif;
+  }
+
+  .container-site {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-accent-hover;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-navy/12 bg-surface px-5 py-2.5 text-sm font-medium text-navy transition hover:border-navy/20 hover:bg-page;
+  }
+
+  .card {
+    @apply rounded-2xl border border-navy/6 bg-surface shadow-[0_1px_2px_rgb(0_0_0_/0.04)];
+  }
+
+  .eyebrow {
+    @apply text-xs font-semibold tracking-[0.12em] text-brand uppercase;
   }
 }

@@ -1,15 +1,11 @@
 import { Footer } from "../components/Footer";
 import { Navigation } from "../components/Navigation";
 
-export default function DesignALayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function SiteLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <Navigation />
-      <div className="pt-14">{children}</div>
+      <div className="pt-[3.75rem]">{children}</div>
       <Footer />
     </>
   );

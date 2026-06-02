@@ -65,7 +65,7 @@ export function HeroMedia({ slides, intervalMs = 6500 }: Props) {
         );
       })}
 
-      <div className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-t from-navy-deep/82 via-navy-deep/28 to-navy-deep/15 md:bg-gradient-to-r md:from-navy-deep/95 md:via-navy-deep/78 md:to-navy-deep/12" />
+      <div className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-t from-navy-deep/88 via-navy-deep/35 to-transparent md:bg-gradient-to-r md:from-navy-deep/92 md:via-navy-deep/55 md:to-navy-deep/20" />
 
       <div className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-t from-black/35 to-transparent md:hidden" />
 

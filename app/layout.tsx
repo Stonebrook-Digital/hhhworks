@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
-import { Cormorant, Plus_Jakarta_Sans } from "next/font/google";
+import { DM_Sans, Fraunces } from "next/font/google";
 import "./globals.css";
 
-const display = Cormorant({
-  variable: "--font-display",
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
-});
-
-const sans = Plus_Jakarta_Sans({
+const sans = DM_Sans({
   variable: "--font-sans",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+});
+
+const display = Fraunces({
+  variable: "--font-display",
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     template: "%s | Triple H Air Conditioning",
   },
   description:
-    "HVAC repair, replacement, maintenance, and installs for Tampa Bay since 2004. Flat-rate quotes, Brandon-based team.",
+    "HVAC repair, replacement, maintenance, and installs for Tampa Bay since 2004. Flat-rate quotes from a Brandon-based team you can trust.",
 };
 
 export default function RootLayout({
@@ -31,7 +31,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${display.variable} ${sans.variable} h-full scroll-smooth`}
+      className={`${sans.variable} ${display.variable} h-full scroll-smooth`}
     >
       <head>
         <link
@@ -42,9 +42,7 @@ export default function RootLayout({
           referrerPolicy="no-referrer"
         />
       </head>
-      <body className="min-h-full bg-page font-[family-name:var(--font-sans)] text-navy antialiased">
-        {children}
-      </body>
+      <body className="min-h-full font-[family-name:var(--font-sans)]">{children}</body>
     </html>
   );
 }
