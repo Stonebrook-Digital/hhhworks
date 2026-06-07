@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ASSETS, PHONE, PHONE_HREF } from "@/lib/site";
 
 type NavLink = { href: string; label: string; shortLabel?: string };
@@ -15,113 +15,226 @@ const links: NavLink[] = [
   { href: "/contact", label: "Contact" },
 ];
 
+/** Any scroll past this (px) triggers the full sticky state */
+const SCROLL_TRIGGER = 6;
+/** How quickly the header eases toward its target (higher = faster settle) */
+const SCROLL_SMOOTHING = 0.11;
+const FLOATING_MAX_WIDTH = 1152;
+const SIDE_INSET = 12;
+
+function lerp(start: number, end: number, t: number) {
+  return start + (end - start) * t;
+}
+
+function getScrollTarget(isHome: boolean) {
+  if (!isHome) return 1;
+  return window.scrollY > SCROLL_TRIGGER ? 1 : 0;
+}
+
 export function Navigation() {
   const pathname = usePathname();
+  const isHome = pathname === "/";
   const [open, setOpen] = useState(false);
+  const [morph, setMorph] = useState(() => (isHome ? 0 : 1));
+  const [floatingTop, setFloatingTop] = useState(12);
+  const [viewportWidth, setViewportWidth] = useState(0);
+  const morphRef = useRef(isHome ? 0 : 1);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)");
+    const syncTopInset = () => setFloatingTop(mq.matches ? 16 : 12);
+    syncTopInset();
+    mq.addEventListener("change", syncTopInset);
+    return () => mq.removeEventListener("change", syncTopInset);
+  }, []);
+
+  useEffect(() => {
+    const syncViewport = () => setViewportWidth(window.innerWidth);
+    syncViewport();
+    window.addEventListener("resize", syncViewport, { passive: true });
+    return () => window.removeEventListener("resize", syncViewport);
+  }, []);
+
+  useEffect(() => {
+    if (!isHome) {
+      morphRef.current = 1;
+      setMorph(1);
+      return;
+    }
+
+    let frame = 0;
+
+    const tick = () => {
+      const target = getScrollTarget(true);
+      const current = morphRef.current;
+      const next =
+        Math.abs(target - current) < 0.0004
+          ? target
+          : current + (target - current) * SCROLL_SMOOTHING;
+
+      morphRef.current = next;
+      setMorph(next);
+      frame = requestAnimationFrame(tick);
+    };
+
+    morphRef.current = getScrollTarget(true);
+    setMorph(morphRef.current);
+    frame = requestAnimationFrame(tick);
+
+    return () => cancelAnimationFrame(frame);
+  }, [isHome]);
+
+  useEffect(() => {
+    setOpen(false);
+    if (!isHome) {
+      morphRef.current = 1;
+      setMorph(1);
+      return;
+    }
+    morphRef.current = getScrollTarget(true);
+    setMorph(morphRef.current);
+  }, [isHome, pathname]);
+
+  const progress = isHome ? morph : 1;
+  const sideInset = lerp(SIDE_INSET, 0, progress);
+  const topInset = lerp(floatingTop, 0, progress);
+  const radius = lerp(16, 0, progress);
+  const shadowY = lerp(12, 0, progress);
+  const shadowBlur = lerp(40, 0, progress);
+  const shadowAlpha = lerp(0.35, 0, progress);
+  const borderSide = lerp(1, 0, progress);
+  const borderAlpha = lerp(0.1, 0.08, progress);
+
+  const floatWidth =
+    viewportWidth > 0
+      ? Math.min(FLOATING_MAX_WIDTH, viewportWidth - SIDE_INSET * 2)
+      : FLOATING_MAX_WIDTH;
+  const barWidth =
+    viewportWidth > 0 ? lerp(floatWidth, viewportWidth, progress) : undefined;
+
+  const shellStyle = {
+    marginTop: topInset,
+    marginLeft: "auto" as const,
+    marginRight: "auto" as const,
+    width: barWidth ? `${barWidth}px` : `calc(100% - ${sideInset * 2}px)`,
+    borderRadius: radius,
+    boxShadow:
+      shadowAlpha > 0.01
+        ? `0 ${shadowY}px ${shadowBlur}px rgb(0 0 0 / ${shadowAlpha})`
+        : undefined,
+    borderTopWidth: borderSide,
+    borderLeftWidth: borderSide,
+    borderRightWidth: borderSide,
+    borderBottomWidth: 1,
+    borderStyle: "solid" as const,
+    borderColor: `rgba(255, 255, 255, ${borderAlpha})`,
+  };
 
   return (
-    <header className="fixed top-0 right-0 left-0 z-[100] border-b border-navy/5 bg-surface/85 backdrop-blur-xl supports-[backdrop-filter]:bg-surface/75">
-      <div className="container-site flex h-[3.75rem] items-center justify-between gap-4">
-        <Link
-          href="/"
-          className="flex shrink-0 items-center transition-opacity hover:opacity-90"
-          onClick={() => setOpen(false)}
-        >
-          <Image
-            src={ASSETS.logo}
-            alt="Triple H Air Conditioning"
-            width={160}
-            height={48}
-            className="h-9 w-auto md:h-10"
-            priority
-          />
-        </Link>
+    <header className="pointer-events-none fixed inset-x-0 top-0 z-[100]">
+      <div className="pointer-events-auto overflow-hidden bg-navy-deep" style={shellStyle}>
+        <div className="container-site flex h-[3.75rem] items-center justify-between gap-4">
+          <Link
+            href="/"
+            className="flex shrink-0 items-center transition-opacity hover:opacity-90"
+            onClick={() => setOpen(false)}
+          >
+            <Image
+              src={ASSETS.logo}
+              alt="Triple H Air Conditioning"
+              width={160}
+              height={48}
+              className="h-9 w-auto md:h-10"
+              priority
+            />
+          </Link>
 
-        <nav className="hidden items-center gap-0.5 md:flex" aria-label="Primary">
-          {links.map(({ href, label, shortLabel }) => {
-            const active = pathname === href || pathname.startsWith(`${href}/`);
-            return (
+          <nav className="hidden items-center gap-0.5 md:flex" aria-label="Primary">
+            {links.map(({ href, label, shortLabel }) => {
+              const active = pathname === href || pathname.startsWith(`${href}/`);
+              return (
+                <Link
+                  key={href}
+                  href={href}
+                  title={shortLabel ? label : undefined}
+                  className={`rounded-lg px-3 py-2 text-sm transition-colors ${
+                    active
+                      ? "font-medium text-white"
+                      : "text-surface/70 hover:bg-white/[0.06] hover:text-white"
+                  }`}
+                >
+                  {shortLabel ? (
+                    <>
+                      <span className="lg:hidden">{shortLabel}</span>
+                      <span className="hidden lg:inline">{label}</span>
+                    </>
+                  ) : (
+                    label
+                  )}
+                </Link>
+              );
+            })}
+          </nav>
+
+          <div className="flex items-center gap-2">
+            <a
+              href={PHONE_HREF}
+              className="hidden items-center gap-2 rounded-full px-3 py-2 text-sm font-medium text-surface/75 transition hover:text-white sm:inline-flex"
+            >
+              <i className="fa-solid fa-phone text-[11px] text-accent" aria-hidden />
+              <span className="hidden tabular-nums lg:inline">{PHONE}</span>
+            </a>
+            <Link href="/contact" className="btn-primary hidden sm:inline-flex">
+              Contact us
+            </Link>
+            <button
+              type="button"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/12 text-white md:hidden"
+              aria-expanded={open}
+              aria-controls="mobile-nav"
+              aria-label={open ? "Close menu" : "Open menu"}
+              onClick={() => setOpen((v) => !v)}
+            >
+              <i className={`fa-solid ${open ? "fa-xmark" : "fa-bars"}`} aria-hidden />
+            </button>
+          </div>
+        </div>
+
+        <div
+          id="mobile-nav"
+          className={`border-t border-white/8 bg-navy-deep md:hidden ${open ? "block" : "hidden"}`}
+        >
+          <nav className="container-site flex flex-col gap-0.5 py-4" aria-label="Mobile">
+            {links.map(({ href, label, shortLabel }) => (
               <Link
                 key={href}
                 href={href}
-                title={shortLabel ? label : undefined}
-                className={`rounded-lg px-3 py-2 text-sm transition-colors ${
-                  active
-                    ? "font-medium text-navy"
-                    : "text-navy-muted hover:bg-navy/[0.04] hover:text-navy"
+                onClick={() => setOpen(false)}
+                className={`rounded-xl px-3 py-3 text-[15px] ${
+                  pathname === href
+                    ? "bg-white/[0.08] font-medium text-white"
+                    : "text-surface/75 hover:bg-white/[0.04] hover:text-white"
                 }`}
               >
-                {shortLabel ? (
-                  <>
-                    <span className="lg:hidden">{shortLabel}</span>
-                    <span className="hidden lg:inline">{label}</span>
-                  </>
-                ) : (
-                  label
-                )}
+                {shortLabel ?? label}
               </Link>
-            );
-          })}
-        </nav>
-
-        <div className="flex items-center gap-2">
-          <a
-            href={PHONE_HREF}
-            className="hidden items-center gap-2 rounded-full px-3 py-2 text-sm font-medium text-navy-muted transition hover:text-navy sm:inline-flex"
-          >
-            <i className="fa-solid fa-phone text-[11px] text-accent" aria-hidden />
-            <span className="hidden tabular-nums lg:inline">{PHONE}</span>
-          </a>
-          <Link href="/contact" className="btn-primary hidden sm:inline-flex">
-            Free estimate
-          </Link>
-          <button
-            type="button"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-navy/8 text-navy md:hidden"
-            aria-expanded={open}
-            aria-controls="mobile-nav"
-            aria-label={open ? "Close menu" : "Open menu"}
-            onClick={() => setOpen((v) => !v)}
-          >
-            <i className={`fa-solid ${open ? "fa-xmark" : "fa-bars"}`} aria-hidden />
-          </button>
-        </div>
-      </div>
-
-      <div
-        id="mobile-nav"
-        className={`border-t border-navy/6 bg-surface md:hidden ${open ? "block" : "hidden"}`}
-      >
-        <nav className="container-site flex flex-col gap-0.5 py-4" aria-label="Mobile">
-          {links.map(({ href, label, shortLabel }) => (
+            ))}
             <Link
-              key={href}
-              href={href}
+              href="/contact"
               onClick={() => setOpen(false)}
-              className={`rounded-xl px-3 py-3 text-[15px] ${
-                pathname === href
-                  ? "bg-navy/[0.05] font-medium text-navy"
-                  : "text-navy-muted hover:bg-page"
-              }`}
+              className="btn-primary mt-2 w-full"
             >
-              {shortLabel ?? label}
+              Contact us
             </Link>
-          ))}
-          <Link
-            href="/contact"
-            onClick={() => setOpen(false)}
-            className="btn-primary mt-2 w-full"
-          >
-            Free estimate
-          </Link>
-          <a
-            href={PHONE_HREF}
-            className="mt-1 flex items-center justify-center gap-2 rounded-xl border border-navy/8 py-3 text-sm font-medium text-navy"
-          >
-            <i className="fa-solid fa-phone text-accent" aria-hidden />
-            {PHONE}
-          </a>
-        </nav>
+            <a
+              href={PHONE_HREF}
+              className="mt-1 flex items-center justify-center gap-2 rounded-xl border border-white/12 py-3 text-sm font-medium text-white"
+            >
+              <i className="fa-solid fa-phone text-accent" aria-hidden />
+              {PHONE}
+            </a>
+          </nav>
+        </div>
       </div>
     </header>
   );

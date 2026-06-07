@@ -20,8 +20,8 @@ export default function HomePage() {
       <section className="relative min-h-[min(92dvh,44rem)] overflow-hidden md:min-h-[min(88dvh,40rem)]">
         <HeroMedia slides={HERO_SLIDES} />
 
-        <div className="relative z-10 container-site flex min-h-[min(92dvh,44rem)] flex-col justify-end pb-16 pt-24 md:min-h-[min(88dvh,40rem)] md:justify-center md:pb-20 md:pt-28">
-          <div className="max-w-xl md:max-w-2xl">
+        <div className="pointer-events-none relative z-10 container-site flex min-h-[min(92dvh,44rem)] flex-col justify-end pb-16 pt-24 md:min-h-[min(88dvh,40rem)] md:justify-center md:pb-20 md:pt-28">
+          <div className="pointer-events-auto max-w-xl md:max-w-2xl">
             <p className="animate-rise-soft delay-1 text-sm font-medium text-surface/80">
               Tampa Bay · Since 2004
             </p>
@@ -33,14 +33,16 @@ export default function HomePage() {
               homes and businesses across the Bay area.
             </p>
             <div className="animate-rise-soft delay-4 mt-8 flex flex-wrap gap-3">
-              <Link href="/contact" className="btn-primary">
-                Free estimate
+              <Link href="/services" className="btn-primary">
+                Learn more
                 <i className="fa-solid fa-arrow-right text-[10px] opacity-80" aria-hidden />
               </Link>
-              <a href={PHONE_HREF} className="btn-secondary border-surface/25 bg-surface/10 text-surface backdrop-blur-sm hover:bg-surface/15">
-                <i className="fa-solid fa-phone text-[11px]" aria-hidden />
-                {PHONE}
-              </a>
+              <Link
+                href="/contact"
+                className="btn-secondary border-surface/25 bg-surface/10 text-surface backdrop-blur-sm hover:bg-surface/15"
+              >
+                Contact us
+              </Link>
             </div>
           </div>
         </div>

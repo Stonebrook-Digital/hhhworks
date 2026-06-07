@@ -4,7 +4,9 @@ export const EMAIL = "triplehair@gmail.com";
 export const EMAIL_HREF = "mailto:triplehair@gmail.com";
 export const ADDRESS = "Brandon, FL 83509";
 export const COMPANY = "Triple H Air Conditioning Inc.";
-export const TAGLINE = "Tampa Bay HVAC — flat-rate quotes, trusted since 2004.";
+export const TAGLINE = "For expert HVAC services, trust Triple H Air Conditioning Inc.";
+export const HOURS_WEEKDAY = "Mon - Sat: 7:00 AM - 7:00 PM";
+export const HOURS_SUNDAY = "Sun: Closed";
 export const GOOGLE_MAPS_URL =
   "https://www.google.com/maps/place/Triple+H+Air+Conditioning+Inc.+Florida/@27.6944883,-83.0484118,141970m/data=!3m1!1e3!4m6!3m5!1s0xa3b37ff0cd0d1147:0x125e662ac29a0a7c!8m2!3d27.732536!4d-82.3051805!16s%2Fg%2F11vqp5hqv6!5m1!1e1?hl=en-PH&entry=ttu";
 
