@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { ContactForm } from "@/app/components/ContactForm";
+import { GoogleMapsEmbed } from "@/app/components/GoogleMapsEmbed";
 import { HeroMedia, type HeroSlide } from "@/app/components/HeroMedia";
 import { ParallaxBand } from "@/app/components/ParallaxBand";
 import { Reveal } from "@/app/components/Reveal";
 import { SectionHeading } from "@/app/components/SectionHeading";
 import { ServiceGrid } from "@/app/components/ServiceGrid";
-import { formatServiceAreaNames } from "@/lib/service-areas";
+import { formatServiceAreaNames, SERVICE_AREAS } from "@/lib/service-areas";
 import { ASSETS, PHONE, PHONE_HREF } from "@/lib/site";
 
 const HERO_SLIDES: HeroSlide[] = [
@@ -87,6 +88,41 @@ export default function HomePage() {
           </Reveal>
           <div className="mt-12">
             <ServiceGrid />
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-navy/6 bg-surface py-10 md:py-12">
+        <div className="container-site">
+          <div className="grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-10">
+            <Reveal>
+              <p className="eyebrow">Coverage</p>
+              <h2 className="font-display mt-2 text-xl font-semibold tracking-tight text-navy md:text-2xl">
+                Areas we serve
+              </h2>
+              <p className="mt-3 text-sm leading-relaxed text-navy-muted md:text-base">
+                We provide HVAC repair, maintenance, installation, and replacement throughout Tampa
+                Bay—including {formatServiceAreaNames()}, and surrounding communities.
+              </p>
+              <ul className="mt-4 flex flex-wrap gap-2">
+                {SERVICE_AREAS.map((area) => (
+                  <li key={area.id}>
+                    <span className="block rounded-full border border-navy/8 bg-page px-3 py-1.5 text-xs font-medium text-navy md:text-sm">
+                      {area.name}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <Link href="/areas" className="btn-secondary mt-5">
+                View areas &amp; reviews
+                <i className="fa-solid fa-arrow-right text-[10px] opacity-70" aria-hidden />
+              </Link>
+            </Reveal>
+            <Reveal delay={80}>
+              <div className="card overflow-hidden p-1.5">
+                <GoogleMapsEmbed variant="hero" className="max-w-none" />
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
