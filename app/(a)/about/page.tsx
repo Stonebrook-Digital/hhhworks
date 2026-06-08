@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHero } from "@/app/components/PageHero";
+import { Reveal } from "@/app/components/Reveal";
 import { COMPANY } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -38,24 +39,28 @@ export default function AboutPage() {
       <section className="py-16 md:py-20">
         <div className="container-site max-w-3xl">
           <div className="space-y-12">
-            {sections.map((section) => (
-              <article key={section.title}>
-                <h2 className="font-display text-xl font-semibold text-navy md:text-2xl">
-                  {section.title}
-                </h2>
-                <p className="mt-3 text-base leading-relaxed text-muted">{section.body}</p>
-              </article>
+            {sections.map((section, index) => (
+              <Reveal key={section.title} delay={index * 80}>
+                <article>
+                  <h2 className="font-display text-xl font-semibold text-navy md:text-2xl">
+                    {section.title}
+                  </h2>
+                  <p className="mt-3 text-base leading-relaxed text-muted">{section.body}</p>
+                </article>
+              </Reveal>
             ))}
           </div>
-          <div className="card mt-14 flex flex-col gap-4 p-6 sm:flex-row sm:items-center sm:justify-between md:p-8">
-            <div>
-              <p className="font-display text-lg font-semibold text-navy">Let&apos;s talk about your system</p>
-              <p className="mt-1 text-sm text-muted">Free estimates · Brandon-based team</p>
+          <Reveal delay={320}>
+            <div className="card mt-14 flex flex-col gap-4 p-6 sm:flex-row sm:items-center sm:justify-between md:p-8">
+              <div>
+                <p className="font-display text-lg font-semibold text-navy">Let&apos;s talk about your system</p>
+                <p className="mt-1 text-sm text-muted">Free estimates · Brandon-based team</p>
+              </div>
+              <Link href="/contact" className="btn-primary shrink-0">
+                Get in touch
+              </Link>
             </div>
-            <Link href="/contact" className="btn-primary shrink-0">
-              Get in touch
-            </Link>
-          </div>
+          </Reveal>
         </div>
       </section>
     </main>

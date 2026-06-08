@@ -20,61 +20,68 @@ export const ASSETS = {
   reviewBg: "/staging/review-bg.jpg",
 } as const;
 
-export const COUNTIES = [
-  "Hillsborough",
-  "Pinellas",
-  "Polk",
-  "Pasco",
-  "Northern Manatee",
-] as const;
-
 export const SERVICES = [
   {
-    title: "Repairs",
+    id: "hvac-repairs",
+    title: "HVAC repairs",
     description:
-      "Fast diagnosis and dependable fixes on all major brands—often resolved in a single visit.",
+      "When your heating or cooling system breaks down, our skilled technicians provide fast, dependable repairs to restore comfort.",
     icon: "fa-screwdriver-wrench",
-    href: "/services#repairs",
+    iconSrc: "/icons-1.png",
+    href: "/services/hvac-repairs",
   },
   {
-    title: "Replacement",
+    id: "hvac-replacement",
+    title: "HVAC replacement",
     description:
-      "Right-sized systems, clean changeouts, and honest guidance on efficiency and cost.",
+      "Our team helps you choose the best system for your needs, ensuring improved comfort and lower utility costs.",
     icon: "fa-fan",
-    href: "/services#replacement",
+    iconSrc: "/living-room-512.png",
+    href: "/services/hvac-replacement",
   },
   {
-    title: "Maintenance",
+    id: "hvac-maintenance",
+    title: "HVAC maintenance",
     description:
-      "Scheduled care that keeps your system efficient and helps prevent surprise breakdowns.",
+      "Our comprehensive maintenance plans keep your system running smoothly and efficiently year-round.",
     icon: "fa-clipboard-check",
-    href: "/services#maintenance",
+    iconSrc: "/air-conditioner-512.png",
+    href: "/services/hvac-maintenance",
   },
   {
-    title: "Tune-ups",
+    id: "hvac-tune-ups",
+    title: "HVAC tune ups",
     description:
-      "Season-ready inspections, cleaning, and adjustments for reliable comfort year-round.",
+      "We inspect, clean, and adjust your system to keep it running reliably through every season.",
     icon: "fa-gauge-high",
-    href: "/services#tune-ups",
+    iconSrc: "/gauge-512.png",
+    href: "/services/hvac-tune-ups",
   },
   {
+    id: "duct-cleaning",
     title: "Duct cleaning",
     description:
-      "Better airflow, lower energy use, and healthier indoor air for your home or business.",
+      "Clean ducts help enhance airflow, reduce energy consumption, and promote a healthier living environment.",
     icon: "fa-wind",
-    href: "/services#duct-cleaning",
+    iconSrc: "/nature-512(1).png",
+    href: "/services/duct-cleaning",
   },
   {
-    title: "New construction",
+    id: "construction-installations",
+    title: "Construction installations",
     description:
-      "HVAC planned and installed with your build timeline—from rough-in to final startup.",
+      "We provide expert HVAC installations for new construction projects, ensuring optimal climate control from the start.",
     icon: "fa-helmet-safety",
-    href: "/services#new-construction",
+    iconSrc: "/cassette-512.png",
+    href: "/services/construction-installations",
   },
-] as const;
+] as const satisfies readonly {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  iconSrc?: string;
+  href: string;
+}[];
 
-export const TRUST_ITEMS = [
-  { label: "Flat-rate quotes", detail: "Approve the price before we start" },
-  { label: "All major brands", detail: "Residential & commercial" },
-  { label: "Tampa Bay", detail: "5-county service area" },
-] as const;
+export type Service = (typeof SERVICES)[number];

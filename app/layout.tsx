@@ -31,6 +31,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      data-scroll-behavior="smooth"
       className={`${sans.variable} ${display.variable} h-full scroll-smooth`}
     >
       <head>

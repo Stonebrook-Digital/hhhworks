@@ -32,6 +32,7 @@ export function Footer() {
               width={180}
               height={54}
               className="h-auto w-[180px] max-w-full"
+              style={{ height: "auto" }}
             />
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-surface/60">{TAGLINE}</p>
           </div>

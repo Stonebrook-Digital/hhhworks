@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { formatServiceAreaNames } from "@/lib/service-areas";
 
 const ITEMS = [
   {
@@ -9,7 +10,7 @@ const ITEMS = [
   },
   {
     q: "What areas do you serve?",
-    a: "We serve Tampa Bay, including Hillsborough, Pinellas, and nearby areas.",
+    a: `We serve Tampa Bay, including ${formatServiceAreaNames()}, and surrounding communities.`,
   },
   {
     q: "Can you service all major HVAC brands?",

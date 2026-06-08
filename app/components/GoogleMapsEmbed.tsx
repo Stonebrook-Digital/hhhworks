@@ -23,7 +23,7 @@ export type GoogleMapsEmbedProps = {
 const WRAPPER: Record<NonNullable<GoogleMapsEmbedProps["variant"]>, string> = {
   hero: "relative aspect-[4/3] w-full max-w-3xl overflow-hidden rounded-xl border border-navy/8 bg-navy/[0.03] shadow-[0_1px_3px_rgb(0_0_0_/0.06)] md:aspect-video md:max-w-none",
   panel:
-    "relative min-h-[280px] w-full flex-1 overflow-hidden rounded-xl border border-navy/8 bg-navy/[0.03] md:min-h-[320px] lg:min-h-[min(100%,28rem)]",
+    "relative min-h-[280px] w-full overflow-hidden rounded-xl border border-navy/8 bg-navy/[0.03] md:min-h-[320px]",
 };
 
 export function GoogleMapsEmbed({ className = "", variant = "hero" }: GoogleMapsEmbedProps) {
