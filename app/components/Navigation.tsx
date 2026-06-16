@@ -20,6 +20,7 @@ const SCROLL_TRIGGER = 6;
 const SCROLL_SMOOTHING = 0.11;
 const FLOATING_MAX_WIDTH = 1152;
 const SIDE_INSET = 12;
+const MD_BREAKPOINT = 768;
 
 function lerp(start: number, end: number, t: number) {
   return start + (end - start) * t;
@@ -28,6 +29,25 @@ function lerp(start: number, end: number, t: number) {
 function getScrollTarget(isHome: boolean) {
   if (!isHome) return 1;
   return window.scrollY > SCROLL_TRIGGER ? 1 : 0;
+}
+
+function MenuIcon({ open }: { open: boolean }) {
+  if (open) {
+    return (
+      <span className="relative block h-4 w-4" aria-hidden>
+        <span className="absolute top-1/2 left-0 h-0.5 w-4 -translate-y-1/2 rotate-45 rounded-full bg-brand" />
+        <span className="absolute top-1/2 left-0 h-0.5 w-4 -translate-y-1/2 -rotate-45 rounded-full bg-brand" />
+      </span>
+    );
+  }
+
+  return (
+    <span className="flex flex-col items-center gap-[5px]" aria-hidden>
+      <span className="h-0.5 w-5 rounded-full bg-brand" />
+      <span className="h-0.5 w-5 rounded-full bg-brand" />
+      <span className="h-0.5 w-5 rounded-full bg-brand" />
+    </span>
+  );
 }
 
 export function Navigation() {
@@ -40,6 +60,8 @@ export function Navigation() {
   const [floatingTop, setFloatingTop] = useState(12);
   const [viewportWidth, setViewportWidth] = useState(0);
   const morphRef = useRef(isHome ? 0 : 1);
+
+  const isMobile = viewportWidth > 0 && viewportWidth < MD_BREAKPOINT;
 
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 768px)");
@@ -98,15 +120,18 @@ export function Navigation() {
     setMorph(morphRef.current);
   }, [isHome, pathname]);
 
-  const progress = isHome ? morph : 1;
+  const scrollProgress = isHome ? morph : 1;
+  /** Mobile stays full-width; desktop homepage morphs from floating pill to edge-to-edge */
+  const progress = isMobile ? 1 : scrollProgress;
+
   const sideInset = lerp(SIDE_INSET, 0, progress);
-  const topInset = lerp(floatingTop, 0, progress);
-  const radius = lerp(16, 0, progress);
-  const shadowY = lerp(12, 0, progress);
-  const shadowBlur = lerp(40, 0, progress);
-  const shadowAlpha = lerp(0.35, 0, progress);
+  const topInset = isMobile ? 0 : lerp(floatingTop, 0, progress);
+  const radius = isMobile ? 0 : lerp(16, 0, progress);
+  const shadowY = lerp(8, 0, progress);
+  const shadowBlur = lerp(24, 0, progress);
+  const shadowAlpha = lerp(0.08, 0, progress);
   const borderSide = lerp(1, 0, progress);
-  const borderAlpha = lerp(0.1, 0.08, progress);
+  const borderAlpha = lerp(0.08, 0.1, progress);
 
   const floatWidth =
     viewportWidth > 0
@@ -123,29 +148,41 @@ export function Navigation() {
     borderRadius: radius,
     boxShadow:
       shadowAlpha > 0.01
-        ? `0 ${shadowY}px ${shadowBlur}px rgb(0 0 0 / ${shadowAlpha})`
+        ? `0 ${shadowY}px ${shadowBlur}px rgb(15 23 42 / ${shadowAlpha})`
         : undefined,
     borderTopWidth: borderSide,
     borderLeftWidth: borderSide,
     borderRightWidth: borderSide,
     borderBottomWidth: 1,
     borderStyle: "solid" as const,
-    borderColor: `rgba(255, 255, 255, ${borderAlpha})`,
+    borderColor: `rgba(30, 41, 59, ${borderAlpha})`,
   };
 
   const servicesActive =
     pathname === "/services" || pathname.startsWith("/services/");
 
+  const desktopNavLink = (active: boolean) =>
+    active
+      ? "font-medium text-brand"
+      : "text-navy-muted hover:bg-navy/[0.04] hover:text-navy";
+
+  const mobileNavLink = (active: boolean) =>
+    active
+      ? "bg-brand/8 font-medium text-brand"
+      : "text-navy-muted hover:bg-navy/[0.04] hover:text-navy";
+
   return (
     <header className="pointer-events-none fixed inset-x-0 top-0 z-[100]">
       <div
-        className={`pointer-events-auto bg-navy-deep ${open ? "overflow-hidden" : "overflow-visible"}`}
+        className={`pointer-events-auto bg-surface ${open ? "overflow-hidden" : "overflow-visible"}`}
         style={shellStyle}
       >
-        <div className="container-site flex h-[3.75rem] items-center justify-between gap-4">
+        <div className="container-site flex h-[3.75rem] items-center md:justify-between md:gap-4">
+          <div className="w-10 shrink-0 md:hidden" aria-hidden />
+
           <Link
             href="/"
-            className="flex shrink-0 items-center transition-opacity hover:opacity-90"
+            className="flex min-w-0 flex-1 justify-center transition-opacity hover:opacity-90 md:flex-none md:justify-start"
             onClick={() => setOpen(false)}
           >
             <Image
@@ -167,11 +204,7 @@ export function Navigation() {
             >
               <Link
                 href="/services"
-                className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm transition-colors ${
-                  servicesActive
-                    ? "font-medium text-white"
-                    : "text-surface/70 hover:bg-white/[0.06] hover:text-white"
-                }`}
+                className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm transition-colors ${desktopNavLink(servicesActive)}`}
                 aria-expanded={servicesOpen}
                 aria-haspopup="true"
               >
@@ -184,7 +217,7 @@ export function Navigation() {
               <div
                 className={`absolute top-full left-0 z-50 pt-2 transition-opacity duration-200 ${servicesOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"}`}
               >
-                <ul className="min-w-[15.5rem] overflow-hidden rounded-xl border border-white/10 bg-navy-deep py-1.5 shadow-[0_16px_40px_rgb(0_0_0_/0.35)]">
+                <ul className="min-w-[15.5rem] overflow-hidden rounded-xl border border-navy/8 bg-surface py-1.5 shadow-[0_16px_40px_rgb(15_23_42_/0.12)]">
                   {SERVICES.map((service) => {
                     const active = pathname === service.href;
                     return (
@@ -193,8 +226,8 @@ export function Navigation() {
                           href={service.href}
                           className={`block px-4 py-2.5 text-sm transition ${
                             active
-                              ? "bg-brand font-medium text-white"
-                              : "text-surface/80 hover:bg-white/[0.06] hover:text-white"
+                              ? "bg-brand/8 font-medium text-brand"
+                              : "text-navy-muted hover:bg-navy/[0.04] hover:text-navy"
                           }`}
                         >
                           {service.title}
@@ -212,11 +245,7 @@ export function Navigation() {
                   key={href}
                   href={href}
                   title={shortLabel ? label : undefined}
-                  className={`rounded-lg px-3 py-2 text-sm transition-colors ${
-                    active
-                      ? "font-medium text-white"
-                      : "text-surface/70 hover:bg-white/[0.06] hover:text-white"
-                  }`}
+                  className={`rounded-lg px-3 py-2 text-sm transition-colors ${desktopNavLink(active)}`}
                 >
                   {shortLabel ? (
                     <>
@@ -231,12 +260,12 @@ export function Navigation() {
             })}
           </nav>
 
-          <div className="flex items-center gap-2">
+          <div className="flex w-10 shrink-0 items-center justify-end md:w-auto md:gap-2">
             <a
               href={PHONE_HREF}
-              className="hidden items-center gap-2 rounded-full px-3 py-2 text-sm font-medium text-surface/75 transition hover:text-white sm:inline-flex"
+              className="hidden items-center gap-2 rounded-full px-3 py-2 text-sm font-medium text-navy-muted transition hover:text-navy sm:inline-flex"
             >
-              <i className="fa-solid fa-phone text-[11px] text-accent" aria-hidden />
+              <i className="fa-solid fa-phone text-[11px] text-brand" aria-hidden />
               <span className="hidden tabular-nums lg:inline">{PHONE}</span>
             </a>
             <Link href="/contact" className="btn-primary hidden sm:inline-flex">
@@ -244,29 +273,25 @@ export function Navigation() {
             </Link>
             <button
               type="button"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/12 text-white md:hidden"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-navy/10 bg-surface shadow-[0_1px_3px_rgb(15_23_42_/0.06)] md:hidden"
               aria-expanded={open}
               aria-controls="mobile-nav"
               aria-label={open ? "Close menu" : "Open menu"}
               onClick={() => setOpen((v) => !v)}
             >
-              <i className={`fa-solid ${open ? "fa-xmark" : "fa-bars"}`} aria-hidden />
+              <MenuIcon open={open} />
             </button>
           </div>
         </div>
 
         <div
           id="mobile-nav"
-          className={`border-t border-white/8 bg-navy-deep md:hidden ${open ? "block" : "hidden"}`}
+          className={`border-t border-navy/8 bg-surface md:hidden ${open ? "block" : "hidden"}`}
         >
           <nav className="container-site flex flex-col gap-0.5 py-4" aria-label="Mobile">
             <button
               type="button"
-              className={`flex w-full items-center justify-between rounded-xl px-3 py-3 text-[15px] ${
-                servicesActive
-                  ? "bg-white/[0.08] font-medium text-white"
-                  : "text-surface/75 hover:bg-white/[0.04] hover:text-white"
-              }`}
+              className={`flex w-full items-center justify-between rounded-xl px-3 py-3 text-[15px] ${mobileNavLink(servicesActive)}`}
               aria-expanded={mobileServicesOpen}
               onClick={() => setMobileServicesOpen((v) => !v)}
             >
@@ -281,11 +306,7 @@ export function Navigation() {
                 <Link
                   href="/services"
                   onClick={() => setOpen(false)}
-                  className={`rounded-xl px-3 py-2.5 text-sm ${
-                    pathname === "/services"
-                      ? "bg-white/[0.08] font-medium text-white"
-                      : "text-surface/70 hover:bg-white/[0.04] hover:text-white"
-                  }`}
+                  className={`rounded-xl px-3 py-2.5 text-sm ${mobileNavLink(pathname === "/services")}`}
                 >
                   All services
                 </Link>
@@ -294,11 +315,7 @@ export function Navigation() {
                     key={service.id}
                     href={service.href}
                     onClick={() => setOpen(false)}
-                    className={`rounded-xl px-3 py-2.5 text-sm ${
-                      pathname === service.href
-                        ? "bg-white/[0.08] font-medium text-white"
-                        : "text-surface/70 hover:bg-white/[0.04] hover:text-white"
-                    }`}
+                    className={`rounded-xl px-3 py-2.5 text-sm ${mobileNavLink(pathname === service.href)}`}
                   >
                     {service.title}
                   </Link>
@@ -310,11 +327,7 @@ export function Navigation() {
                 key={href}
                 href={href}
                 onClick={() => setOpen(false)}
-                className={`rounded-xl px-3 py-3 text-[15px] ${
-                  pathname === href
-                    ? "bg-white/[0.08] font-medium text-white"
-                    : "text-surface/75 hover:bg-white/[0.04] hover:text-white"
-                }`}
+                className={`rounded-xl px-3 py-3 text-[15px] ${mobileNavLink(pathname === href)}`}
               >
                 {shortLabel ?? label}
               </Link>
@@ -328,9 +341,9 @@ export function Navigation() {
             </Link>
             <a
               href={PHONE_HREF}
-              className="mt-1 flex items-center justify-center gap-2 rounded-xl border border-white/12 py-3 text-sm font-medium text-white"
+              className="mt-1 flex items-center justify-center gap-2 rounded-xl border border-navy/10 py-3 text-sm font-medium text-navy"
             >
-              <i className="fa-solid fa-phone text-accent" aria-hidden />
+              <i className="fa-solid fa-phone text-brand" aria-hidden />
               {PHONE}
             </a>
           </nav>
