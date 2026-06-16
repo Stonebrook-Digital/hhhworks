@@ -177,7 +177,7 @@ export function Navigation() {
         className={`pointer-events-auto bg-surface ${open ? "overflow-hidden" : "overflow-visible"}`}
         style={shellStyle}
       >
-        <div className="container-site flex h-[3.75rem] items-center md:justify-between md:gap-4">
+        <div className="container-site flex h-[3.75rem] items-center overflow-visible md:justify-between md:gap-4">
           <div className="w-10 shrink-0 md:hidden" aria-hidden />
 
           <Link
@@ -190,7 +190,7 @@ export function Navigation() {
               alt="Triple H Air Conditioning"
               width={180}
               height={96}
-              className="h-9 w-auto md:h-10"
+              className="h-9 w-auto origin-center scale-[2] md:scale-100 md:h-10"
               style={{ width: "auto" }}
               priority
               unoptimized

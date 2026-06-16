@@ -11,8 +11,12 @@ export type ServicePageContent = {
   heroSubtitle: string;
   bannerSrc?: string;
   bannerAlt?: string;
+  /** CSS object-position for the hero banner crop, e.g. "left center" */
+  bannerPosition?: string;
   imageSrc?: string;
   imageAlt?: string;
+  /** CSS object-position for the intro image crop */
+  imagePosition?: string;
   introTitle?: string;
   intro: string;
   sections: ServicePageSection[];
@@ -29,8 +33,10 @@ export const SERVICE_PAGES: Record<string, ServicePageContent> = {
     heroSubtitle: "Your solution for reliable HVAC repairs",
     bannerSrc: "/hvac-repairs-banner.jpg",
     bannerAlt: "Outdoor HVAC condenser unit against a brick wall",
+    bannerPosition: "left center",
     imageSrc: "/hvac-repair-services.jpg",
     imageAlt: "HVAC technician tools and outdoor AC units ready for repair service",
+    imagePosition: "left center",
     introTitle: "Expert HVAC repairs by Triple H Air Conditioning Inc.",
     intro:
       "Your HVAC system keeps your home or business comfortable. When something breaks down, you need answers fast. Our trained technicians diagnose the issue and restore your system efficiently.",
@@ -62,10 +68,12 @@ export const SERVICE_PAGES: Record<string, ServicePageContent> = {
       "Professional HVAC replacement in Tampa Bay. Personalized system recommendations, expert installation, and lasting comfort.",
     heroTitle: "Expert HVAC replacement",
     heroSubtitle: "Ensuring efficient and reliable HVAC systems",
-    bannerSrc: "/hvac-replacement-banner.jpg",
-    bannerAlt: "Professional HVAC tools and equipment ready for replacement service",
-    imageSrc: "/hvac-replacement-services.jpg",
-    imageAlt: "Outdoor air conditioning condenser unit installed at a residential property",
+    bannerSrc: "/hvac-replacement-services.jpg",
+    bannerAlt: "Outdoor air conditioning condenser unit installed at a residential property",
+    bannerPosition: "35% 85%",
+    imageSrc: "/hvac-replacement-banner.jpg",
+    imageAlt: "Professional HVAC tools and equipment ready for replacement service",
+    imagePosition: "right center",
     introTitle: "Professional HVAC replacement services",
     intro:
       "When it's time for an HVAC replacement, choosing the right provider is crucial. At Triple H Air Conditioning Inc., we upgrade homes and businesses with the latest heating and cooling technology—guided by certified technicians through a smooth transition to a more efficient system.",
@@ -99,8 +107,10 @@ export const SERVICE_PAGES: Record<string, ServicePageContent> = {
     heroSubtitle: "Maximize the efficiency and longevity of your system",
     bannerSrc: "/hvac-maintenance-banner.jpg",
     bannerAlt: "Two outdoor HVAC condenser units on a patio beside a home",
+    bannerPosition: "40% center",
     imageSrc: "/hvac-maintenance-services.jpg",
     imageAlt: "HVAC technician checking refrigerant levels on an outdoor condenser unit",
+    imagePosition: "left 35%",
     introTitle: "Comprehensive HVAC maintenance services",
     intro:
       "Regular maintenance keeps your heating, ventilation, and air conditioning running at peak efficiency. At Triple H Air Conditioning Inc., our maintenance services prolong system life, improve performance, and reduce the risk of unexpected breakdowns—while helping lower energy costs.",
@@ -134,8 +144,10 @@ export const SERVICE_PAGES: Record<string, ServicePageContent> = {
     heroSubtitle: "Keeping your system running at its best",
     bannerSrc: "/hvac-tune-ups-banner.jpg",
     bannerAlt: "HVAC manifold gauges connected to an outdoor condenser unit",
+    bannerPosition: "55% center",
     imageSrc: "/hvac-tune-up-services.jpg",
     imageAlt: "Technician holding manifold gauges during an HVAC tune-up",
+    imagePosition: "center 25%",
     introTitle: "Optimize your HVAC system with professional tune-ups",
     intro:
       "Regular tune-ups keep your heating, ventilation, and air conditioning healthy and efficient. At Triple H Air Conditioning Inc., our comprehensive tune-ups optimize performance, extend system life, and reduce costly breakdowns—so you stay comfortable year-round while keeping energy costs in check.",
@@ -169,8 +181,10 @@ export const SERVICE_PAGES: Record<string, ServicePageContent> = {
     heroSubtitle: "Enhance your indoor air quality with expert duct cleaning",
     bannerSrc: "/duct-cleaning-banner.jpg",
     bannerAlt: "Duct cleaning brush inside a metal ventilation duct",
+    bannerPosition: "center center",
     imageSrc: "/duct-cleaning-services.jpg",
     imageAlt: "Duct cleaning brush removing dust and debris from a vent",
+    imagePosition: "center 30%",
     introTitle: "Professional duct cleaning services",
     intro:
       "Clean ductwork is essential for good indoor air quality and efficient HVAC operation. Over time, ducts collect dust, allergens, and debris that affect air quality and system performance. Triple H Air Conditioning Inc. uses advanced techniques and equipment to thoroughly clean your ductwork for a healthier, more comfortable space.",
@@ -204,8 +218,10 @@ export const SERVICE_PAGES: Record<string, ServicePageContent> = {
     heroSubtitle: "Seamless HVAC solutions for new construction projects",
     bannerSrc: "/construction-installations-banner.jpg",
     bannerAlt: "Close-up of outdoor HVAC condenser units installed along a stone wall",
+    bannerPosition: "left center",
     imageSrc: "/new-construction-hvac-installations.jpg",
     imageAlt: "Row of outdoor HVAC condenser units installed at a new construction site",
+    imagePosition: "70% 25%",
     introTitle: "Expert new construction HVAC installation services",
     intro:
       "New builds need HVAC planned from the ground up. At Triple H Air Conditioning Inc., we deliver tailored installation solutions for residential and commercial construction—working closely with builders and architects to integrate efficient, reliable systems into every project.",

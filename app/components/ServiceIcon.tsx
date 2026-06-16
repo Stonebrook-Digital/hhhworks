@@ -23,6 +23,7 @@ export function ServiceIcon({ icon, iconSrc, title, size = "md" }: ServiceIconPr
         height={px}
         className={`${className} object-contain`}
         aria-hidden
+        unoptimized
       />
     );
   }

@@ -17,7 +17,8 @@ export function ServiceDetailLayout({ page }: { page: ServicePageContent }) {
               src={page.bannerSrc}
               alt=""
               fill
-              className="object-cover object-center"
+              className="object-cover"
+              style={{ objectPosition: page.bannerPosition ?? "center center" }}
               sizes="100vw"
               priority
               aria-hidden
@@ -78,8 +79,8 @@ export function ServiceDetailLayout({ page }: { page: ServicePageContent }) {
                     alt={page.imageAlt ?? page.heroTitle}
                     width={1200}
                     height={800}
-                    className="h-auto w-full object-cover"
-                    style={{ height: "auto" }}
+                    className="aspect-[4/3] w-full object-cover"
+                    style={{ objectPosition: page.imagePosition ?? "center center" }}
                     priority
                   />
                 </div>
