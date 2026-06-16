@@ -11,7 +11,11 @@ export const GOOGLE_MAPS_URL =
   "https://www.google.com/maps/place/Triple+H+Air+Conditioning+Inc.+Florida/@27.6944883,-83.0484118,141970m/data=!3m1!1e3!4m6!3m5!1s0xa3b37ff0cd0d1147:0x125e662ac29a0a7c!8m2!3d27.732536!4d-82.3051805!16s%2Fg%2F11vqp5hqv6!5m1!1e1?hl=en-PH&entry=ttu";
 
 export const ASSETS = {
-  logo: "/staging/triple-h-logo.png",
+  /** Header — HHH mark (transparent export) */
+  logo: "/triple-h-logo.png",
+  /** Footer and welcome intro — full mark with subtext */
+  logoWithSubtitle: "/triple-h-logo-with-subtitle.png",
+  logoMark: "/triple-h-logo.png",
   hero: [
     "/staging/hero-1.jpg",
     "/staging/hero-2.jpg",
@@ -27,7 +31,7 @@ export const SERVICES = [
     description:
       "When your heating or cooling system breaks down, our skilled technicians provide fast, dependable repairs to restore comfort.",
     icon: "fa-screwdriver-wrench",
-    iconSrc: "/icons-1.png",
+    iconSrc: "/hvac-repairs-512.png",
     href: "/services/hvac-repairs",
   },
   {
@@ -45,7 +49,7 @@ export const SERVICES = [
     description:
       "Our comprehensive maintenance plans keep your system running smoothly and efficiently year-round.",
     icon: "fa-clipboard-check",
-    iconSrc: "/air-conditioner-512.png",
+    iconSrc: "/maintenance-512.png",
     href: "/services/hvac-maintenance",
   },
   {
@@ -63,7 +67,7 @@ export const SERVICES = [
     description:
       "Clean ducts help enhance airflow, reduce energy consumption, and promote a healthier living environment.",
     icon: "fa-wind",
-    iconSrc: "/nature-512(1).png",
+    iconSrc: "/nature-512.png",
     href: "/services/duct-cleaning",
   },
   {

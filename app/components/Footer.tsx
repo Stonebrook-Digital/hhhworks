@@ -27,12 +27,13 @@ export function Footer() {
         <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr_1fr] lg:gap-12">
           <div>
             <Image
-              src={ASSETS.logo}
+              src={ASSETS.logoWithSubtitle}
               alt="Triple H Air Conditioning"
-              width={180}
-              height={54}
-              className="h-auto w-[180px] max-w-full"
-              style={{ height: "auto" }}
+              width={280}
+              height={149}
+              className="h-auto w-[200px] max-w-full md:w-[240px]"
+              style={{ width: "auto", height: "auto" }}
+              unoptimized
             />
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-surface/60">{TAGLINE}</p>
           </div>

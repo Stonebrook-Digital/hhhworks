@@ -188,11 +188,12 @@ export function Navigation() {
             <Image
               src={ASSETS.logo}
               alt="Triple H Air Conditioning"
-              width={160}
-              height={48}
+              width={180}
+              height={96}
               className="h-9 w-auto md:h-10"
               style={{ width: "auto" }}
               priority
+              unoptimized
             />
           </Link>
 

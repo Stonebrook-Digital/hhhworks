@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ContactForm } from "@/app/components/ContactForm";
 import { GoogleMapsEmbed } from "@/app/components/GoogleMapsEmbed";
 import { HeroMedia, type HeroSlide } from "@/app/components/HeroMedia";
@@ -49,29 +50,43 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="border-b border-navy/6 bg-surface py-12 md:py-16">
+      <section className="border-b border-navy/6 bg-surface py-14 md:py-20">
         <div className="container-site max-w-3xl">
           <Reveal>
-            <h2 className="font-display text-2xl font-semibold tracking-tight text-brand uppercase md:text-[1.75rem]">
-              Welcome to Triple H Air Conditioning Inc.
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-navy-muted">
+            <div className="flex flex-col items-center text-center">
+              <Image
+                src={ASSETS.logoWithSubtitle}
+                alt="Triple H Air Conditioning"
+                width={480}
+                height={255}
+                className="h-auto w-full max-w-[min(100%,20rem)] sm:max-w-xs md:max-w-sm lg:max-w-md"
+                style={{ width: "auto", height: "auto" }}
+                priority
+                unoptimized
+              />
+              <p className="eyebrow mt-8">Welcome</p>
+              <h2 className="font-display mt-2 text-2xl font-semibold tracking-tight text-navy md:text-[1.75rem]">
+                Welcome to Triple H Air Conditioning Inc.
+              </h2>
+            </div>
+            <p className="mt-6 text-center text-base leading-relaxed text-navy-muted md:text-lg">
               We&apos;re a full-service HVAC contractor for repair, maintenance, and installation
               throughout Tampa Bay—including {formatServiceAreaNames()}. Our goal is straightforward:
-              keep your
-              system efficient, your home comfortable, and your energy costs under control.
+              keep your system efficient, your home comfortable, and your energy costs under control.
             </p>
-            <h3 className="font-display mt-6 text-lg font-semibold tracking-tight text-navy uppercase">
+            <h3 className="font-display mt-8 text-center text-lg font-semibold tracking-tight text-navy uppercase">
               Expert repairs and maintenance
             </h3>
-            <p className="mt-2 text-base leading-relaxed text-navy-muted">
+            <p className="mt-2 text-center text-base leading-relaxed text-navy-muted">
               We work on all major brands and diagnose problems quickly so repairs get done right the
               first time. Regular tune-ups and scheduled service help prevent breakdowns and extend the
               life of your equipment.
             </p>
-            <Link href="/about" className="btn-primary mt-6">
-              Read more
-            </Link>
+            <div className="mt-6 flex justify-center">
+              <Link href="/about" className="btn-primary">
+                Read more
+              </Link>
+            </div>
           </Reveal>
         </div>
       </section>
