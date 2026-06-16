@@ -18,10 +18,10 @@ const HERO_SLIDES: HeroSlide[] = [
 export default function HomePage() {
   return (
     <main>
-      <section className="relative min-h-[min(92dvh,44rem)] overflow-hidden md:min-h-[min(88dvh,40rem)]">
+      <section className="relative min-h-dvh overflow-hidden">
         <HeroMedia slides={HERO_SLIDES} />
 
-        <div className="pointer-events-none relative z-10 container-site flex min-h-[min(92dvh,44rem)] flex-col justify-end pb-16 pt-24 md:min-h-[min(88dvh,40rem)] md:justify-center md:pb-20 md:pt-28">
+        <div className="pointer-events-none relative z-10 container-site flex min-h-dvh flex-col justify-end pb-16 pt-24 md:justify-center md:pb-20 md:pt-28">
           <div className="pointer-events-auto max-w-xl md:max-w-2xl">
             <p className="animate-rise-soft delay-1 text-sm font-medium text-surface/80">
               Tampa Bay · Since 2004

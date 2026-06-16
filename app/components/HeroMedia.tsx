@@ -69,7 +69,7 @@ export function HeroMedia({ slides, intervalMs = 6500 }: Props) {
 
       <div className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-t from-black/35 to-transparent md:hidden" />
 
-      <div className="absolute right-0 bottom-5 left-0 z-[10] flex items-center justify-center gap-3 px-4 md:justify-start md:pl-8 lg:pl-10">
+      <div className="absolute right-0 bottom-5 left-0 z-[10] hidden items-center justify-center gap-3 px-4 md:flex md:justify-start md:pl-8 lg:pl-10">
         <div className="relative z-[1] flex items-center gap-1.5 rounded-full border border-white/12 bg-navy-deep/35 px-2 py-1.5 backdrop-blur-md">
           <button
             type="button"
