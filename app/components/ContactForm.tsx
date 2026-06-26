@@ -1,30 +1,44 @@
 "use client";
 
-import { FormEvent } from "react";
-import { COMPANY, EMAIL_HREF } from "@/lib/site";
+import { FormEvent, useState } from "react";
+import { COMPANY, FORMSPREE_ACTION, PHONE, PHONE_HREF } from "@/lib/site";
 
 type ContactFormProps = {
   variant?: "default" | "quote" | "compact";
 };
 
+type FormStatus = "idle" | "submitting" | "success" | "error";
+
 export function ContactForm({ variant = "default" }: ContactFormProps) {
   const isQuote = variant === "quote";
   const isCompact = variant === "compact";
+  const [status, setStatus] = useState<FormStatus>("idle");
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const fd = new FormData(e.currentTarget);
-    const name = String(fd.get("name") ?? "").trim();
-    const phone = String(fd.get("phone") ?? "").trim();
-    const email = String(fd.get("email") ?? "").trim();
-    const service = String(fd.get("service") ?? "");
-    const message = String(fd.get("message") ?? "").trim();
-    if (!name || !phone || !email || !service || !message) return;
-    const subject = encodeURIComponent(`Website — ${service}`);
-    const body = encodeURIComponent(
-      `Name: ${name}\nPhone: ${phone}\nEmail: ${email}\nService: ${service}\n\nMessage:\n${message}`,
-    );
-    window.location.href = `${EMAIL_HREF}?subject=${subject}&body=${body}`;
+    setStatus("submitting");
+
+    const form = e.currentTarget;
+    const fd = new FormData(form);
+    const service = String(fd.get("service") ?? "General inquiry");
+    fd.set("_subject", `Website — ${service}`);
+
+    try {
+      const res = await fetch(FORMSPREE_ACTION, {
+        method: "POST",
+        body: fd,
+        headers: { Accept: "application/json" },
+      });
+
+      if (res.ok) {
+        setStatus("success");
+        form.reset();
+        return;
+      }
+      setStatus("error");
+    } catch {
+      setStatus("error");
+    }
   }
 
   const field = isCompact
@@ -42,10 +56,30 @@ export function ContactForm({ variant = "default" }: ContactFormProps) {
       ? "space-y-5"
       : "grid gap-4 sm:grid-cols-2";
 
+  if (status === "success") {
+    return (
+      <div className="rounded-xl border border-brand/15 bg-brand/5 px-5 py-8 text-center">
+        <p className="font-display text-lg font-semibold text-navy">Request sent</p>
+        <p className="mt-2 text-sm leading-relaxed text-muted">
+          Thanks for reaching out. We&apos;ll get back to you soon—usually within one business day.
+        </p>
+        <button
+          type="button"
+          className="btn-secondary mt-6"
+          onClick={() => setStatus("idle")}
+        >
+          Send another message
+        </button>
+      </div>
+    );
+  }
+
   return (
     <form
       onSubmit={handleSubmit}
       className={isCompact ? `grid ${formGap}` : formGap}
+      action={FORMSPREE_ACTION}
+      method="POST"
     >
       <div className={namePhoneLayout}>
         <label className="block">
@@ -58,6 +92,7 @@ export function ContactForm({ variant = "default" }: ContactFormProps) {
             autoComplete="name"
             className={field}
             placeholder="Your name"
+            disabled={status === "submitting"}
           />
         </label>
         <label className="block">
@@ -71,6 +106,7 @@ export function ContactForm({ variant = "default" }: ContactFormProps) {
             autoComplete="tel"
             className={field}
             placeholder="(813) …"
+            disabled={status === "submitting"}
           />
         </label>
       </div>
@@ -88,11 +124,18 @@ export function ContactForm({ variant = "default" }: ContactFormProps) {
               autoComplete="email"
               className={field}
               placeholder="you@email.com"
+              disabled={status === "submitting"}
             />
           </label>
           <label className="block">
             <span className={label}>Interested in</span>
-            <select name="service" required className={field} defaultValue="">
+            <select
+              name="service"
+              required
+              className={field}
+              defaultValue=""
+              disabled={status === "submitting"}
+            >
               <option value="" disabled>
                 Select…
               </option>
@@ -119,11 +162,18 @@ export function ContactForm({ variant = "default" }: ContactFormProps) {
               autoComplete="email"
               className={field}
               placeholder="you@email.com"
+              disabled={status === "submitting"}
             />
           </label>
           <label className="block">
             <span className={label}>Interested in</span>
-            <select name="service" required className={field} defaultValue="">
+            <select
+              name="service"
+              required
+              className={field}
+              defaultValue=""
+              disabled={status === "submitting"}
+            >
               <option value="" disabled>
                 Select a service…
               </option>
@@ -147,21 +197,35 @@ export function ContactForm({ variant = "default" }: ContactFormProps) {
           rows={isCompact ? 2 : isQuote ? 5 : 4}
           className={`${field} resize-y`}
           placeholder="What can we help with?"
+          disabled={status === "submitting"}
         />
       </label>
 
+      {status === "error" ? (
+        <p className="text-sm text-accent" role="alert">
+          Something went wrong. Please try again or call{" "}
+          <a href={PHONE_HREF} className="font-medium underline">
+            {PHONE}
+          </a>
+          .
+        </p>
+      ) : null}
+
       <button
         type="submit"
+        disabled={status === "submitting"}
         className={
           isCompact
-            ? "btn-primary w-full py-2.5 text-sm sm:w-auto sm:justify-self-start"
+            ? "btn-primary w-full py-2.5 text-sm sm:w-auto sm:justify-self-start disabled:opacity-60"
             : isQuote
-              ? "btn-primary w-full py-3.5"
-              : "w-full rounded-lg bg-accent py-3.5 text-sm font-medium text-white transition hover:bg-accent-hover"
+              ? "btn-primary w-full py-3.5 disabled:opacity-60"
+              : "w-full rounded-lg bg-accent py-3.5 text-sm font-medium text-white transition hover:bg-accent-hover disabled:opacity-60"
         }
       >
-        Send request
-        <i className="fa-solid fa-paper-plane text-[11px] opacity-90" aria-hidden />
+        {status === "submitting" ? "Sending…" : "Send request"}
+        {status !== "submitting" ? (
+          <i className="fa-solid fa-paper-plane text-[11px] opacity-90" aria-hidden />
+        ) : null}
       </button>
 
       {isQuote ? (
@@ -174,10 +238,10 @@ export function ContactForm({ variant = "default" }: ContactFormProps) {
         <p className="text-center text-xs text-muted">
           Prefer the phone?{" "}
           <a
-            href="tel:+18136554501"
+            href={PHONE_HREF}
             className="font-medium text-navy underline decoration-navy/15 underline-offset-4 hover:decoration-navy/35"
           >
-            (813) 655-4501
+            {PHONE}
           </a>
         </p>
       )}
