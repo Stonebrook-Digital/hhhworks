@@ -89,7 +89,3 @@ export const SERVICES = [
 }[];
 
 export type Service = (typeof SERVICES)[number];
-
-/** Formspree endpoint for contact / estimate forms */
-export const FORMSPREE_ACTION =
-  process.env.NEXT_PUBLIC_FORMSPREE_ACTION ?? "https://formspree.io/f/mkoljlqz";

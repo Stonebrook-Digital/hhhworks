@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { COMPANY, FORMSPREE_ACTION, PHONE, PHONE_HREF } from "@/lib/site";
+import { COMPANY, PHONE, PHONE_HREF } from "@/lib/site";
 
 type ContactFormProps = {
   variant?: "default" | "quote" | "compact";
@@ -20,14 +20,20 @@ export function ContactForm({ variant = "default" }: ContactFormProps) {
 
     const form = e.currentTarget;
     const fd = new FormData(form);
-    const service = String(fd.get("service") ?? "General inquiry");
-    fd.set("_subject", `Website — ${service}`);
+
+    const payload = {
+      name: String(fd.get("name") ?? "").trim(),
+      email: String(fd.get("email") ?? "").trim(),
+      phone: String(fd.get("phone") ?? "").trim(),
+      service: String(fd.get("service") ?? "").trim(),
+      message: String(fd.get("message") ?? "").trim(),
+    };
 
     try {
-      const res = await fetch(FORMSPREE_ACTION, {
+      const res = await fetch("/api/contact", {
         method: "POST",
-        body: fd,
-        headers: { Accept: "application/json" },
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
       });
 
       if (res.ok) {
@@ -75,12 +81,7 @@ export function ContactForm({ variant = "default" }: ContactFormProps) {
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className={isCompact ? `grid ${formGap}` : formGap}
-      action={FORMSPREE_ACTION}
-      method="POST"
-    >
+    <form onSubmit={handleSubmit} className={isCompact ? `grid ${formGap}` : formGap}>
       <div className={namePhoneLayout}>
         <label className="block">
           <span className={label}>
